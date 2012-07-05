@@ -30,7 +30,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    Project.find(params[:id]).delete
+    @project = Project.find(params[:id])
+    @project.destroy
     redirect_to projects_path
   end
 end

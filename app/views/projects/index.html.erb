@@ -4,7 +4,8 @@
       <li>
          <%= project.name %>
          <%= link_to 'edit', edit_project_path(project) %>
-         <%= link_to 'delete', project, action: :destroy %>
+         <%= link_to 'delete', project, method: :delete %>
       </li>
    <% end %>
 </ul>
+<%= link_to 'Add New Project', new_project_path %>

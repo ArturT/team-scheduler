@@ -11,12 +11,16 @@ describe "projects" do
       page.should have_content "List Of Projects"
     end
 
-    it "click edit link" do
+    it "has edit link" do
       page.should have_link 'edit'
     end
 
-    it "click delete link" do
+    it "has delete link" do
       page.should have_link 'delete'
+    end
+
+    it "has new project link" do
+      page.should have_link 'Add New Project'
     end
 
     it "displays all projects' names" do

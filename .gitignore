@@ -8,3 +8,4 @@
 /spec/Spec.iml
 .generators
 .rakeTasks
+/tmp/*
