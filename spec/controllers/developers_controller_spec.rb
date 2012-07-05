@@ -59,4 +59,41 @@ describe DevelopersController do
       end
     end
   end
+
+  describe "edit" do
+    it "gets the developer from the db" do
+      Developer.new(:name => "DevName").save
+      get :edit, {:id => 1}
+      developer = assigns(:developer)
+      developer.name.should == "DevName"
+    end
+  end
+
+  describe "update" do
+    before do
+      Developer.new(:name => "DevName").save
+    end
+
+    context "when params are correct" do
+      it "gets developer from db" do
+        post :update, {:id => 1}
+        developer = assigns(:developer)
+        developer.name.should == "DevName"
+      end
+
+      it "updates developer in db" do
+        before = Developer.find(1).name
+        post :update, {:id => 1, :developer => {:name => "ChangedName"}}
+        after = Developer.find(1).name
+        before.should_not == after
+      end
+    end
+
+    context "when params are incorrect" do
+      it "update attributes fails" do
+        post :update, {:id => 1, :developer => {:name => ""}}
+        response.should render_template("edit")
+      end
+    end
+  end
 end

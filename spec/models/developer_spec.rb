@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Developer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "validates presence of name" do
+    Developer.new(:name => '').should_not be_valid
+  end
 end

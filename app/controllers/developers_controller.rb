@@ -15,4 +15,17 @@ class DevelopersController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @developer = Developer.find(params[:id])
+  end
+
+  def update
+    @developer = Developer.find(params[:id])
+    if @developer.update_attributes(params[:developer])
+      redirect_to developers_path
+    else
+      render :edit
+    end
+  end
 end
