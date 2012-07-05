@@ -1,0 +1,10 @@
+/.bundle
+/db/*.sqlite3
+/log/*.log
+*.ipr
+*.iws
+*.iml
+*.rdoc
+/spec/Spec.iml
+.generators
+.rakeTasks
