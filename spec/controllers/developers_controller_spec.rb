@@ -40,9 +40,7 @@ describe DevelopersController do
       end
 
       it "saves to db" do
-        Developer.count.should == 0
-        dispatch
-        Developer.count.should == 1
+        expect{ dispatch }.to change {Developer.count }.by(1)
       end
 
       it "redirect to index" do
@@ -99,9 +97,7 @@ describe DevelopersController do
   describe "delete" do
     it "delete developer" do
       FactoryGirl.create(:developer)
-      Developer.count.should == 1
-      post :destroy, {:id => 1}
-      Developer.count.should == 0
+      expect{ post :destroy, {:id => 1} }.to change{ Developer.count }.by(-1)
     end
   end
 end
