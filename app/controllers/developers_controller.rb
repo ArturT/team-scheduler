@@ -28,4 +28,9 @@ class DevelopersController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    Developer.find(params[:id]).delete
+    redirect_to developers_path
+  end
 end

@@ -95,4 +95,13 @@ describe DevelopersController do
       end
     end
   end
+
+  describe "delete" do
+    it "delete developer" do
+      FactoryGirl.create(:developer)
+      Developer.count.should == 1
+      post :destroy, {:id => 1}
+      Developer.count.should == 0
+    end
+  end
 end

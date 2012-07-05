@@ -3,6 +3,8 @@
    <% @developers.each do |dev| %>
       <li>
          <%= dev.name %>
+         <%= link_to 'edit', edit_developer_path(dev) %>
+         <%= link_to 'delete', dev, action: :destroy %>
       </li>
    <% end %>
 </ul>
