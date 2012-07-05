@@ -45,3 +45,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'ruby_gntp'
 end
+
+group :test do
+  gem 'capybara'
+end
