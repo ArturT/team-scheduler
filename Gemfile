@@ -44,6 +44,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'ruby_gntp'
+  gem 'factory_girl_rails'
 end
 
 group :test do

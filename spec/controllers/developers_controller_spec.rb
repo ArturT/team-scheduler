@@ -8,9 +8,8 @@ describe DevelopersController do
     end
 
     it "assigns developers variable" do
-      developer = Developer.new(:name => "dev")
+      developer = FactoryGirl.build(:developer)
       developer.save
-
       get :index
       assigns(:developers).should == [developer]
     end
@@ -62,7 +61,7 @@ describe DevelopersController do
 
   describe "edit" do
     it "gets the developer from the db" do
-      Developer.new(:name => "DevName").save
+      FactoryGirl.create(:developer)
       get :edit, {:id => 1}
       developer = assigns(:developer)
       developer.name.should == "DevName"
@@ -71,7 +70,7 @@ describe DevelopersController do
 
   describe "update" do
     before do
-      Developer.new(:name => "DevName").save
+      FactoryGirl.create(:developer)
     end
 
     context "when params are correct" do

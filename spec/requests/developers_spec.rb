@@ -3,16 +3,16 @@ require 'spec_helper'
 describe "developers" do
   describe "GET /developers" do
     it "renders list of developers" do
-      Developer.new(:name => "dev").save
+      FactoryGirl.create(:developer)
       visit developers_path
       page.should have_content "List Of Developers"
     end
 
     it "displays all developers' names" do
-      Developer.new(:name => "dev_name").save
+      FactoryGirl.create(:developer)
       visit developers_path
       page.should have_selector("li")
-      page.should have_content "dev_name"
+      page.should have_content "DevName"
     end
   end
 
@@ -31,7 +31,7 @@ describe "developers" do
 
   describe "GET /developers/edit" do
     before do
-      Developer.new(:name => "DevName").save
+      FactoryGirl.create(:developer)
     end
 
     it "renders populated for for developer fields" do
