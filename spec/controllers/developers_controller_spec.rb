@@ -40,7 +40,7 @@ describe DevelopersController do
       end
 
       it "saves to db" do
-        expect{ dispatch }.to change {Developer.count }.by(1)
+        expect{ dispatch }.to change{Developer.count}.by(1)
       end
 
       it "redirect to index" do

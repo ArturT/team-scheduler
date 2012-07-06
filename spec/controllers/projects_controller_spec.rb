@@ -8,7 +8,7 @@ describe ProjectsController do
     end
 
     it "assigns projects variable" do
-      project = FactoryGirl.build(:project)
+      project = build(:project)
       project.save
       get :index
       assigns(:projects).should == [project]
@@ -40,9 +40,7 @@ describe ProjectsController do
       end
 
       it "saves to db" do
-        Project.count.should == 0
-        dispatch
-        Project.count.should == 1
+        expect{ dispatch }.to change{Project.count}.by(1)
       end
 
       it "redirect to index" do
@@ -99,9 +97,7 @@ describe ProjectsController do
   describe "delete" do
     it "delete project" do
       create(:project)
-      Project.count.should == 1
-      post :destroy, {:id => 1}
-      Project.count.should == 0
+      expect{ post :destroy, :id => 1 }.to change{ Project.count }.by(-1)
     end
   end
 end

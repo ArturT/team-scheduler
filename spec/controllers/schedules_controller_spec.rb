@@ -115,4 +115,13 @@ describe SchedulesController do
       end
     end
   end
+
+  describe "destroy" do
+    it "deletes schedule" do
+      create(:schedule)
+      create(:project)
+      expect {post :destroy, :id =>1, :project_id => 1 }.to change{Schedule.count}.by(-1)
+      response.should redirect_to project_path(1)
+    end
+  end
 end

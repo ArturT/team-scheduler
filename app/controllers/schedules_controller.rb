@@ -27,6 +27,11 @@ class SchedulesController < ApplicationController
     else
       render :edit
     end
+  end
 
+  def destroy
+    @schedule = Schedule.find(params[:id])
+    @schedule.destroy
+    redirect_to project_path(params[:project_id])
   end
 end
