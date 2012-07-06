@@ -3,59 +3,52 @@ require 'spec_helper'
 describe "projects" do
   describe "GET /projects" do
     before do
-      FactoryGirl.create(:project)
+      create(:project)
       visit projects_path
     end
 
     it "renders list of projects" do
-      page.should have_content "List Of Projects"
+      page.should have_content 'List Of Projects'
+      page.should have_content 'ProjectName'
     end
 
-    it "has edit link" do
+    it "has edits project link" do
       page.should have_link 'edit'
+      click_link 'edit'
+      page.should have_selector 'input', :value => 'ProjectName'
     end
 
-    it "has delete link" do
+    it "has deletes project link" do
       page.should have_link 'delete'
+      click_link 'delete'
+      page.should_not have_content 'ProjectName'
     end
 
     it "has new project link" do
       page.should have_link 'Add New Project'
-    end
-
-    it "displays all projects' names" do
-      page.should have_selector("li")
-      page.should have_content "ProjectName"
+      click_link 'Add New Project'
+      page.should have_selector 'input', :name => 'name'
     end
   end
 
   describe "GET /projects/new" do
-    it "renders form for project fields" do
-      visit new_project_path
-      page.should have_selector "input", :name => 'name'
-    end
-
     it "adds new project" do
       visit new_project_path
-      fill_in 'Name', :with => 'DevName'
+      page.should have_selector 'input', :name => 'name'
+      fill_in 'Name', :with => 'ProjectName'
       click_button 'Create Project'
+      page.should have_content('ProjectName')
     end
   end
 
   describe "GET /projects/edit" do
-    before do
-      FactoryGirl.create(:project)
-    end
-
-    it "renders populated for for project fields" do
+    it "updates project name" do
+      create(:project)
       visit edit_project_path(:id => 1)
       page.should have_selector "input", {:name => "name", :value => "ProjectName"}
-    end
-
-    it "updates project name" do
-      visit edit_project_path(:id => 1)
       fill_in "Name", :with => "ChangedName"
       click_button "Update Project"
+      page.should have_content "ChangedName"
     end
   end
 end
