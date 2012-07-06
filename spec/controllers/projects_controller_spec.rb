@@ -94,10 +94,26 @@ describe ProjectsController do
     end
   end
 
-  describe "delete" do
+  describe "destroy" do
     it "delete project" do
       create(:project)
       expect{ post :destroy, :id => 1 }.to change{ Project.count }.by(-1)
+    end
+  end
+
+  describe "show" do
+    it "gets the project object" do
+      create(:project)
+      get :show, :id => 1
+      assigns(:project).should be_instance_of(Project)
+    end
+
+    it "gets list of schedules for this project" do
+      create(:project)
+      create(:schedule)
+      get :show, :id => 1
+      schedules = assigns(:schedules)
+      schedules.count.should == 1
     end
   end
 end

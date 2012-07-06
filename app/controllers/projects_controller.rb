@@ -34,4 +34,9 @@ class ProjectsController < ApplicationController
     @project.destroy
     redirect_to projects_path
   end
+
+  def show
+    @project = Project.find(params[:id])
+    @schedules = Schedule.find_all_by_project_id(params[:id])
+  end
 end

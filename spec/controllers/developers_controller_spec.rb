@@ -94,7 +94,7 @@ describe DevelopersController do
     end
   end
 
-  describe "delete" do
+  describe "destroy" do
     it "delete developer" do
       create(:developer)
       expect{ post :destroy, {:id => 1} }.to change{ Developer.count }.by(-1)

@@ -52,7 +52,7 @@ describe SchedulesController do
       end
 
       it "renders new with the values" do
-        response.should render_template("new")
+        response.should render_template("new", :project_id => 1)
       end
     end
   end

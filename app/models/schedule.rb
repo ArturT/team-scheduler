@@ -1,4 +1,5 @@
 class Schedule < ActiveRecord::Base
+  belongs_to :developer
   attr_accessible :developer_id, :end_date, :project_id, :start_date
   validates :developer_id, :presence => true
   validates :project_id, :presence => true

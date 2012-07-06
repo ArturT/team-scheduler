@@ -51,4 +51,14 @@ describe "projects" do
       page.should have_content "ChangedName"
     end
   end
+
+  describe "GET /projects/show" do
+    it "shows a list of developers on this project" do
+      create(:project)
+      create(:schedule)
+      visit project_path(:id => 1)
+      page.should have_content 'ProjectName'
+      page.should have_content 'DevName'
+    end
+  end
 end
