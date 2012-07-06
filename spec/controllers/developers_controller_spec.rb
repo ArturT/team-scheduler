@@ -8,7 +8,7 @@ describe DevelopersController do
     end
 
     it "assigns developers variable" do
-      developer = FactoryGirl.build(:developer)
+      developer = build(:developer)
       developer.save
       get :index
       assigns(:developers).should == [developer]
@@ -23,7 +23,7 @@ describe DevelopersController do
 
     it "assigns new developer variable" do
       get :new
-      assigns(:developer).should.equal? Developer.new
+      assigns(:developer).should be_a_new(Developer)
     end
   end
 
@@ -59,7 +59,7 @@ describe DevelopersController do
 
   describe "edit" do
     it "gets the developer from the db" do
-      FactoryGirl.create(:developer)
+      create(:developer)
       get :edit, {:id => 1}
       developer = assigns(:developer)
       developer.name.should == "DevName"
@@ -68,7 +68,7 @@ describe DevelopersController do
 
   describe "update" do
     before do
-      FactoryGirl.create(:developer)
+      create(:developer)
     end
 
     context "when params are correct" do
@@ -96,7 +96,7 @@ describe DevelopersController do
 
   describe "delete" do
     it "delete developer" do
-      FactoryGirl.create(:developer)
+      create(:developer)
       expect{ post :destroy, {:id => 1} }.to change{ Developer.count }.by(-1)
     end
   end

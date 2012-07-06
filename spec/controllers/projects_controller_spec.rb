@@ -23,7 +23,7 @@ describe ProjectsController do
 
     it "assigns new project variable" do
       get :new
-      assigns(:project).should.equal? Project.new
+      assigns(:project).should be_a_new(Project)
     end
   end
 
@@ -61,7 +61,7 @@ describe ProjectsController do
 
   describe "edit" do
     it "gets the project from the db" do
-      FactoryGirl.create(:project)
+      create(:project)
       get :edit, {:id => 1}
       project = assigns(:project)
       project.name.should == "ProjectName"
@@ -70,7 +70,7 @@ describe ProjectsController do
 
   describe "update" do
     before do
-      FactoryGirl.create(:project)
+      create(:project)
     end
 
     context "when params are correct" do
@@ -98,7 +98,7 @@ describe ProjectsController do
 
   describe "delete" do
     it "delete project" do
-      FactoryGirl.create(:project)
+      create(:project)
       Project.count.should == 1
       post :destroy, {:id => 1}
       Project.count.should == 0
