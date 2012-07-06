@@ -1,7 +1,9 @@
 TeamScheduler::Application.routes.draw do
 
   resources :developers
-  resources :projects
+  resources :projects do
+    resources :schedules
+  end
 
   root :to => "projects#index"
 
