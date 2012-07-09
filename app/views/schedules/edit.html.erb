@@ -1,7 +1,16 @@
-<%= form_for(@schedule, :url => project_schedules_path(@project)) do |f| %>
+<%= form_for(@schedule, :url => project_schedule_path(@project.id, @schedule.id)) do |f| %>
+   <% if @schedule.errors.any? %>
+      <div>
+         <% @schedule.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+         <% end %>
+      </div>
+   <% end %>
+
    <div>
       <label>Project Name:</label>
       <%= text_field_tag 'project_name', @project.name, :disabled => true %>
+      <%= f.hidden_field :project_id, :value => @project.id %>
    </div>
 
    <div>

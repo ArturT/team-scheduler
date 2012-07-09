@@ -1,5 +1,12 @@
 <h1>Add New Developer</h1>
 <%= form_for(@developer) do |f| %>
+   <% if @developer.errors.any? %>
+      <div>
+         <% @developer.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+         <% end %>
+      </div>
+   <% end %>
 <%= f.label :name %>
 <%= f.text_field :name  %>
 <%= f.submit %>

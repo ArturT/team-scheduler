@@ -2,5 +2,14 @@
 
 <ul>
    <% @schedules.each do |schedule| %>
+      <li>
+         <%= schedule.developer.name %> |
+         <%= schedule.start_date %> |
+         <%= schedule.end_date %> |
+         <%= link_to 'edit', edit_project_schedule_path(@project, schedule) %> |
+         <%= link_to 'delete', project_schedule_path(@project, schedule), :method => :delete %>
+      </li>
    <% end %>
 </ul>
+<%= link_to 'Add Developer to This Project', new_project_schedule_path(@project) %> |
+<%= link_to 'Back', projects_path %>

@@ -3,9 +3,11 @@
    <% @projects.each do |project| %>
       <li>
          <%= project.name %>
+         <%= link_to 'show', project_path(project) %>
          <%= link_to 'edit', edit_project_path(project) %>
-         <%= link_to 'delete', project, method: :delete %>
+         <%= link_to 'delete', project_path(project), :method => :delete %>
       </li>
    <% end %>
 </ul>
-<%= link_to 'Add New Project', new_project_path %>
+<%= link_to 'Add New Project', new_project_path %> |
+<%= link_to 'Back', root_path %>

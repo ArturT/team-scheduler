@@ -1,5 +1,12 @@
 <h1>Add New Project</h1>
 <%= form_for(@project) do |f| %>
+   <% if @project.errors.any? %>
+      <div>
+         <% @project.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+         <% end %>
+      </div>
+   <% end %>
    <%= f.label :name %>
    <%= f.text_field :name  %>
    <%= f.submit %>
