@@ -48,6 +48,7 @@ describe SchedulesController do
 
     context "when parameters are invalid" do
       before do
+        create(:project)
         post :create, :project_id => 1, :schedule => {:project_id => 1, :developer_id => 1, :start_date => "2012-01-31", :end_date => "2012-01-01"}
       end
 
@@ -107,6 +108,7 @@ describe SchedulesController do
     context "when the parameters are invalid" do
       before do
         create(:schedule)
+        create(:project)
         post :update, :id => 1, :project_id => 1, :schedule => {:project_id => 1, :developer_id => 1, :start_date => "2012-01-31", :end_date => "2012-01-01"}
       end
 

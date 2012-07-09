@@ -43,9 +43,9 @@ describe ProjectsController do
         expect{ dispatch }.to change{Project.count}.by(1)
       end
 
-      it "redirect to index" do
+      it "redirect to this project" do
         dispatch
-        response.should redirect_to projects_path
+        response.should redirect_to project_path(1)
       end
     end
 

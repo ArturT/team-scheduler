@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      redirect_to projects_path
+      redirect_to project_path(@project)
     else
       render :new
     end
@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      redirect_to projects_path
+      redirect_to project_path(@project)
     else
       render :edit
     end

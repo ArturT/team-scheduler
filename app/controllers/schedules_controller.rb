@@ -10,6 +10,8 @@ class SchedulesController < ApplicationController
     if @schedule.save
       redirect_to project_path(params[:project_id])
     else
+      @project = Project.find(params[:project_id])
+      @developers = Developer.all
       render :new
     end
   end
@@ -25,6 +27,8 @@ class SchedulesController < ApplicationController
     if @schedule.update_attributes(params[:schedule])
       redirect_to project_path(params[:project_id])
     else
+      @project = Project.find(params[:project_id])
+      @developers = Developer.all
       render :edit
     end
   end
