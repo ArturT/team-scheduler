@@ -38,6 +38,12 @@ describe "developers" do
       fill_in 'Name', :with => 'ChangeName'
       click_button 'Create Developer'
     end
+
+    it "has errors message" do
+      visit new_developer_path
+      click_button 'Create Developer'
+      page.should have_content("can't be blank")
+    end
   end
 
   describe "GET /developers/edit" do

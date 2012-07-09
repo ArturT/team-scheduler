@@ -39,6 +39,12 @@ describe "projects" do
       click_button 'Create Project'
       page.should have_content('ProjectName')
     end
+
+    it "has errors message" do
+      visit new_project_path
+      click_button 'Create Project'
+      page.should have_content("can't be blank")
+    end
   end
 
   describe "GET /projects/edit" do
