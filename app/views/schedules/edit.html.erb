@@ -1,3 +1,5 @@
+<h1 class="page-header">Edit Schedule</h1>
+
 <%= form_for(@schedule, :url => project_schedule_path(@project.id, @schedule.id)) do |f| %>
    <% if @schedule.errors.any? %>
       <div>

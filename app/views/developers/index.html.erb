@@ -1,12 +1,13 @@
-<h1>List Of Developers</h1>
+<h1 class="page-header">List Of Developers</h1>
+
 <ul>
-   <% @developers.each do |dev| %>
-      <li>
-         <%= dev.name %>
-         <%= link_to 'edit', edit_developer_path(dev) %>
-         <%= link_to 'delete', developer_path(dev), :method => :delete %>
-      </li>
-   <% end %>
+  <% @developers.each do |dev| %>
+  <li>
+    <%= dev.name %>
+    <%= link_to 'edit', edit_developer_path(dev) %>
+    <%= link_to 'delete', developer_path(dev), :method => :delete %>
+  </li>
+  <% end %>
 </ul>
-<%= link_to 'Add New Developer', new_developer_path %> |
+<%= link_to 'Add New Developer', new_developer_path, { :class => 'btn btn-primary'} %> |
 <%= link_to 'Back', root_path %>
