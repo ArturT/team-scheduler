@@ -1,37 +1,47 @@
-<h1>Developer Timetable for <%= @dates.first.strftime("%B %Y") %></h1>
-
-<%= link_to 'Previous Month', root_path(:date => @dates.first.prev_month) %> |
-<%= link_to 'Current Month', root_path(:date => Date.today) %> |
-<%= link_to 'Next Month', root_path(:date => @dates.first.next_month) %>
-
-<table>
-   <thead>
-   <tr>
-      <th>Developer</th>
-      <% @dates.each do |date| %>
-         <th>
-            <%= date.strftime("%d") %>
-         </th>
-      <% end %>
-   </tr>
-   </thead>
-   <tbody>
-   <% @developers.each do |dev| %>
-      <tr>
-
-         <td>
-            <%= dev.name %>
-         </td>
-         <% @dates.each do |date| %>
-            <td>
-               <% dev.schedules.each do |schedule| %>
-                  <% if schedule.start_date <= date and schedule.end_date >= date %>
-                     <span title="<%= schedule.project.name %>">x</span>                     
-                  <% end %>
-               <% end %>
-            </td>
-         <% end %>
-      </tr>
-   <% end %>
-   </tbody>
-</table>
+<div class="page-header">
+  <h1>Developer Timetable for <%= @dates.first.strftime("%B %Y") %></h1>
+</div>
+<div>
+  <ul class="pager">
+    <li class="previous">
+      <%= link_to raw('<i class="icon-circle-arrow-left"></i> Previous Month'), root_path(:date => @dates.first.prev_month) %>
+    </li>
+    <li>
+      <%= link_to 'Current Month', root_path(:date => Date.today) %>
+    </li>
+    <li class="next">
+      <%= link_to raw('Next Month <i class="icon-circle-arrow-right"></i>'), root_path(:date => @dates.first.next_month) %>
+    </li>
+  </ul>
+  
+  <table class="table table-bordered table-striped responsive-utilities">
+     <thead>
+     <tr>
+        <th>Developer</th>
+        <% @dates.each do |date| %>
+           <th>
+              <%= date.strftime("%d") %>
+           </th>
+        <% end %>
+     </tr>
+     </thead>
+     <tbody>
+     <% @developers.each do |dev| %>
+        <tr>
+           <td>
+              <%= dev.name %>
+           </td>
+           <% @dates.each do |date| %>
+              <td>
+                 <% dev.schedules.each do |schedule| %>
+                    <% if schedule.start_date <= date and schedule.end_date >= date %>
+                       <span class="label label-success" title="<%= schedule.project.name %>">x</span>
+                    <% end %>
+                 <% end %>
+              </td>
+           <% end %>
+        </tr>
+     <% end %>
+     </tbody>
+  </table>
+</div>

@@ -9,22 +9,26 @@
 <body>
 	
 <div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container">
-			<a class="brand" href="/">
-				Team Scheduler
-			</a>
-			<ul class="nav">
-				<li><%= li_menu_item 'Board', boards_path %></li>
-				<li><%= li_menu_item 'Developers', developers_path %></li>
-				<li><%= li_menu_item 'Projects', projects_path %></li>
-			</ul>
-		</div>
-	</div>
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/"> Team Scheduler </a>
+      <ul class="nav">
+        <li>
+          <%= li_menu_item 'Boards', boards_path %>
+        </li>
+        <li>
+          <%= li_menu_item 'Developers', developers_path %>
+        </li>
+        <li>
+          <%= li_menu_item 'Projects', projects_path %>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="container">
-	<%= yield %>
+<%= yield %>
 </div>
 
 </body>

@@ -23,6 +23,6 @@ module ApplicationHelper
       raw '<li class="active">' << link_to(title, path, options) << '</li>'
     else
       raw '<li>' << link_to(title, path, options) << '</li>'
-    end    
+    end
   end
 end
