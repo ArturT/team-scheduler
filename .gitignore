@@ -9,3 +9,4 @@
 .generators
 .rakeTasks
 /tmp/*
+/config/database.yml

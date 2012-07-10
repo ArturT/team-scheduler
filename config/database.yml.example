@@ -1,0 +1,23 @@
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: teamscheduler_test
+  username: root
+  password:
+  host: 127.0.0.1
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: teamscheduler_development
+  username: root
+  password:
+  host: 127.0.0.1
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: teamscheduler_production
+  username: root
+  password:
+  host: 127.0.0.1
