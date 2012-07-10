@@ -26,7 +26,7 @@
             <td>
                <% dev.schedules.each do |schedule| %>
                   <% if schedule.start_date <= date and schedule.end_date >= date %>
-                     <%= schedule.project.name %><br>
+                     <span title="<%= schedule.project.name %>">x</span>                     
                   <% end %>
                <% end %>
             </td>
@@ -35,5 +35,3 @@
    <% end %>
    </tbody>
 </table>
-<%= link_to 'Developers', developers_path %>
-<%= link_to 'Projects', projects_path %>
