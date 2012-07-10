@@ -11,7 +11,7 @@ describe "boards" do
 
     it "render boards template" do
       page.should have_content "DevName"
-      page.should have_content "ProjectName"
+      have_xpath("//span][@title='ProjectName']")
     end
 
     it "shows the header for the current date" do
