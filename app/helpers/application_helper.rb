@@ -26,3 +26,16 @@ module ApplicationHelper
     end
   end
 end
+
+class String
+  # http://stackoverflow.com/a/2955911  
+  def is_date?
+    begin
+       Date.parse(self)
+       true
+    rescue
+       #do something if invalid
+       false
+    end
+  end
+end
