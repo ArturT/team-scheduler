@@ -7,6 +7,15 @@ $blue: #97D4F2;
     cursor: pointer;
   }
 
+  .th_board_size {
+    height: 70px;
+  }
+
+  .weekday_name_container {
+    overflow: visible;
+    width: 5px;
+  }
+
   .weekday_name {
     -webkit-transform: rotate(-90deg);  
     -moz-transform: rotate(-90deg);  
@@ -19,7 +28,8 @@ $blue: #97D4F2;
     right: -5px;
   }
 
-  .th_board_size {
-    height: 70px;
+  // cell color
+  .weekend {
+    background: #FDFFC8;
   }
-} 
+}

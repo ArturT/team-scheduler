@@ -19,14 +19,14 @@
          Developer<br />Name
       </th>
       <% @dates.each do |date| %>
-      <th>
-        <div style="overflow:visible;width:5px;">
-          <div class="weekday_name">
-            <%= date.strftime("%a") %>
+        <th<%= if is_weekend date then raw ' class="weekend"' end %>>
+          <div class="weekday_name_container">
+            <div class="weekday_name">
+              <%= date.strftime("%a") %>
+            </div>
           </div>
-        </div>
-        <%= date.strftime("%d") %>
-      </th>
+          <%= date.strftime("%d") %>
+        </th>
       <% end %>
     </tr>
   </thead>
@@ -35,9 +35,10 @@
     <tr>
       <td><%= dev.name %></td>
       <% @dates.each do |date| %>
-      <td>
+      <td<%= if is_weekend date then raw ' class="weekend"' end %>>
         <% dev.schedules.each do |schedule| %>
-          <% if schedule.start_date <= date and schedule.end_date >= date %>
+          <%# don't show project if weekend %>
+          <% if schedule.start_date <= date and schedule.end_date >= date and !is_weekend date %>
             <span rel="tooltip" class="label label-success" title="<%= schedule.project.name %>">x</span><br />
           <% end %>
         <% end %>
