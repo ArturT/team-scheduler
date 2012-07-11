@@ -1,13 +1,26 @@
 <h1 class="page-header">List Of Developers</h1>
 
-<ul>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="action_td_with">Action</th>
+    </tr>
+  </thead>
   <% @developers.each do |dev| %>
-  <li>
-    <%= dev.name %>
-    <%= link_to 'edit', edit_developer_path(dev) %>
-    <%= link_to 'delete', developer_path(dev), :method => :delete %>
-  </li>
+  <tr>
+    <td>
+      <%= dev.name %>
+    </td>
+    <td>
+      <%= link_to 'edit', edit_developer_path(dev), :class => 'btn btn-mini' %>
+      <%= link_to 'delete', developer_path(dev), :method => :delete, :class => 'btn btn-mini', :confirm => 'Are you sure?' %>
+    </td>
+  </tr>
   <% end %>
-</ul>
-<%= link_to 'Add New Developer', new_developer_path, { :class => 'btn btn-primary'} %> |
-<%= link_to 'Back', root_path %>
+</table>
+
+<div class="form-actions">
+  <%= link_to 'Add New Developer', new_developer_path, {:class => 'btn btn-primary'} %>
+  <%= link_to 'Back', root_path, { :class => 'btn'} %>
+</div>
