@@ -28,7 +28,7 @@ module ApplicationHelper
 end
 
 class String
-  # http://stackoverflow.com/a/2955911  
+  # http://stackoverflow.com/a/2955911
   def is_date?
     begin
        Date.parse(self)
