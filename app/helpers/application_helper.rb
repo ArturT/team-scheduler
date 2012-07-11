@@ -29,7 +29,7 @@ end
 
 class String
   # http://stackoverflow.com/a/2955911
-  def is_date?
+  def date?
     begin
        Date.parse(self)
        true
