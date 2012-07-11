@@ -15,10 +15,10 @@
 <table class="table table-bordered table-striped responsive-utilities" id="board_calendar">
    <thead>
    <tr>
-      <th>Developer</th>
+      <th>Developer<br>Name</th>
       <% @dates.each do |date| %>
          <th>
-            <%= date.strftime("%d") %>
+            <%= date.strftime("%a\n%d") %>
          </th>
       <% end %>
    </tr>
