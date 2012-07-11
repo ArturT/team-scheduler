@@ -1,6 +1,25 @@
+//$blue: #0088CC;
+$blue: #97D4F2;
+
 // used in boards/index.html.erb
 #board_calendar {
-  td span {
+  td span[rel=tooltip] {
     cursor: pointer;
+  }
+
+  .weekday_name {
+    -webkit-transform: rotate(-90deg);  
+    -moz-transform: rotate(-90deg);  
+    -o-transform: rotate(-90deg);  
+    -ms-transform: rotate(-90deg);  
+    transform: rotate(-90deg);
+    color: $blue;
+    position: relative;
+    top: 0px;
+    right: -5px;
+  }
+
+  .th_board_size {
+    height: 70px;
   }
 } 

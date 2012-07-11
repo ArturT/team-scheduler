@@ -1,31 +1,49 @@
 <h1 class="page-header">Add New Schedule</h1>
 
-<%= form_for(@schedule, :url => project_schedules_path(@project.id)) do |f| %>
-   <% if @schedule.errors.any? %>
-      <div>
-         <% @schedule.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-         <% end %>
-      </div>
-   <% end %>
+<%= form_for(@schedule, :url => project_schedules_path(@project.id), :html => {:class => 'form-horizontal'}) do |f| %>
+<% if @schedule.errors.any? %>
+<div class="alert alert-error">
+  <ul>
+    <% @schedule.errors.full_messages.each do |msg| %>
+    <li>
+      <%= msg %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-   <div>
-      <label>Project Name:</label>
-      <%= text_field_tag 'project_name', @project.name, :disabled => true %>
-      <%= f.hidden_field :project_id, :value => @project.id %>
-   </div>
+<div class="control-group">
+  <label class="control-label">Project Name:</label>
+  <div class="controls">
+    <%= text_field_tag 'project_name', @project.name, :disabled => true %>
+    <%= f.hidden_field :project_id, :value => @project.id %>
+  </div>
+</div>
 
-   <div>
-      <label>Pick Developer:</label>
-      <%= f.collection_select(:developer_id, @developers, :id, :name) %>
-   </div>
-   <div>
-      <%= f.label :start_date %>
-      <%= f.date_select "start_date" %>
-   </div>
-   <div>
-      <%= f.label :end_date %>
-      <%= f.date_select "end_date" %>
-   </div>
-   <%= f.submit %>
+<div class="control-group">
+  <label class="control-label">Pick Developer:</label>
+  <div class="controls">
+    <%= f.collection_select(:developer_id, @developers, :id, :name) %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :start_date, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.date_select "start_date" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :end_date, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.date_select "end_date" %>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= f.submit :class => 'btn btn-primary' %>
+  <%= link_to 'Back', project_path(@project), :class => 'btn' %>
+</div>
 <% end %>

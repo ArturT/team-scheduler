@@ -13,32 +13,37 @@
 </ul>
 
 <table class="table table-bordered table-striped responsive-utilities" id="board_calendar">
-   <thead>
-   <tr>
-      <th>Developer<br>Name</th>
+  <thead>
+    <tr>
+      <th class="th_board_size">
+         Developer<br />Name
+      </th>
       <% @dates.each do |date| %>
-         <th>
-            <%= date.strftime("%a\n%d") %>
-         </th>
+      <th>
+        <div style="overflow:visible;width:5px;">
+          <div class="weekday_name">
+            <%= date.strftime("%a") %>
+          </div>
+        </div>
+        <%= date.strftime("%d") %>
+      </th>
       <% end %>
-   </tr>
-   </thead>
-   <tbody>
-   <% @developers.each do |dev| %>
-      <tr>
-         <td>
-            <%= dev.name %>
-         </td>
-         <% @dates.each do |date| %>
-            <td>
-               <% dev.schedules.each do |schedule| %>
-                  <% if schedule.start_date <= date and schedule.end_date >= date %>
-                     <span rel="tooltip" class="label label-success" title="<%= schedule.project.name %>">x</span>
-                  <% end %>
-               <% end %>
-            </td>
-         <% end %>
-      </tr>
-   <% end %>
-   </tbody>
+    </tr>
+  </thead>
+  <tbody>
+    <% @developers.each do |dev| %>
+    <tr>
+      <td><%= dev.name %></td>
+      <% @dates.each do |date| %>
+      <td>
+        <% dev.schedules.each do |schedule| %>
+          <% if schedule.start_date <= date and schedule.end_date >= date %>
+            <span rel="tooltip" class="label label-success" title="<%= schedule.project.name %>">x</span><br />
+          <% end %>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
 </table>

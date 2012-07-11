@@ -1,15 +1,34 @@
 <h1 class="page-header"><%= @project.name %></h1>
 
-<ul>
-   <% @schedules.each do |schedule| %>
-      <li>
-         <%= schedule.developer.name %> |
-         <%= schedule.start_date %> |
-         <%= schedule.end_date %> |
-         <%= link_to 'edit', edit_project_schedule_path(@project, schedule) %> |
-         <%= link_to 'delete', project_schedule_path(@project, schedule), :method => :delete %>
-      </li>
-   <% end %>
-</ul>
-<%= link_to 'Add Developer to This Project', new_project_schedule_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<% if @schedules.count > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th class="action_td_with">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schedules.each do |schedule| %>
+      <tr>
+        <td><%= schedule.developer.name %></td>
+        <td><%= schedule.start_date %></td>
+        <td><%= schedule.end_date %></td>
+        <td>
+          <%= link_to 'edit', edit_project_schedule_path(@project, schedule), :class => 'btn btn-mini' %>
+          <%= link_to 'delete', project_schedule_path(@project, schedule), :method => :delete, :class => 'btn btn-mini', :confirm => 'Are you sure?' %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-block">There is no schedules.</div>
+<% end %>
+
+<div class="form-actions">
+  <%= link_to 'Add Developer to This Project', new_project_schedule_path(@project), :class => 'btn btn-primary' %>
+  <%= link_to 'Back', projects_path, :class => 'btn' %>
+</div>

@@ -1,5 +1,6 @@
 <h1 class="page-header">List Of Developers</h1>
 
+<% if @developers.count > 0 %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,20 +8,25 @@
       <th class="action_td_with">Action</th>
     </tr>
   </thead>
-  <% @developers.each do |dev| %>
-  <tr>
-    <td>
-      <%= dev.name %>
-    </td>
-    <td>
-      <%= link_to 'edit', edit_developer_path(dev), :class => 'btn btn-mini' %>
-      <%= link_to 'delete', developer_path(dev), :method => :delete, :class => 'btn btn-mini', :confirm => 'Are you sure?' %>
-    </td>
-  </tr>
-  <% end %>
+  <tbody>
+    <% @developers.each do |dev| %>
+    <tr>
+      <td>
+        <%= dev.name %>
+      </td>
+      <td>
+        <%= link_to 'edit', edit_developer_path(dev), :class => 'btn btn-mini' %>
+        <%= link_to 'delete', developer_path(dev), :method => :delete, :class => 'btn btn-mini', :confirm => 'Are you sure?' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
+<% else %>
+  <div class="alert alert-block">There is no developers.</div>
+<% end %>
 
 <div class="form-actions">
-  <%= link_to 'Add New Developer', new_developer_path, {:class => 'btn btn-primary'} %>
-  <%= link_to 'Back', root_path, { :class => 'btn'} %>
+  <%= link_to 'Add New Developer', new_developer_path, :class => 'btn btn-primary' %>
+  <%= link_to 'Back', root_path, :class => 'btn' %>
 </div>
