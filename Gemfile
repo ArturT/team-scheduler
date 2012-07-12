@@ -55,3 +55,7 @@ end
 
 # twitter bootstrap
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+# http://rubygems.org/gems/mini_colors-rails
+# http://rubydoc.info/gems/mini_colors-rails/1.0.5/frames
+gem "mini_colors-rails", "~> 1.0.5"

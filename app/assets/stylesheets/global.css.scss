@@ -1,4 +1,18 @@
+$red_error_bg: #F2DEDE;
+$red_error_border: #B94A48;
+
 // used in developers/index.html.erb
 td.action_td_with, th.action_td_with {
   width: 150px;
+}
+
+// http://stackoverflow.com/a/5268065
+.field_with_errors {
+  display: inline;
+}
+
+.field_with_errors input[type="text"], .field_with_errors textarea {
+  padding: 3px 2px;
+  //border: 2px solid $red_error_border;
+  box-shadow: 0px 0px 10px $red_error_border;
 }
