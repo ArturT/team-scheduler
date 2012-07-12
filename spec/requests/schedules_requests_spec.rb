@@ -17,21 +17,39 @@ describe 'schedules' do
       page.should have_selector "select[name='schedule[developer_id]']"
     end
 
-    it "has list of start date dropdown" do
-      page.should have_selector "select[name='schedule[start_date(1i)]']"
-      page.should have_selector "select[name='schedule[start_date(2i)]']"
-      page.should have_selector "select[name='schedule[start_date(3i)]']"
+    # deprecated because we use datepicker
+    # it "has list of start date dropdown" do
+      # page.should have_selector "select[name='schedule[start_date(1i)]']"
+      # page.should have_selector "select[name='schedule[start_date(2i)]']"
+      # page.should have_selector "select[name='schedule[start_date(3i)]']"
+    # end
+
+    it "has a start date field" do
+      page.should have_selector 'input#schedule_start_date'
     end
 
-    it "has list of end date dropdown" do
-      page.should have_selector "select[name='schedule[end_date(1i)]']"
-      page.should have_selector "select[name='schedule[end_date(2i)]']"
-      page.should have_selector "select[name='schedule[end_date(3i)]']"
+    # deprecated because we use datepicker
+    # it "has list of end date dropdown" do
+      # page.should have_selector "select[name='schedule[end_date(1i)]']"
+      # page.should have_selector "select[name='schedule[end_date(2i)]']"
+      # page.should have_selector "select[name='schedule[end_date(3i)]']"
+    # end
+
+    it "has an end date field" do
+      page.should have_selector 'input#schedule_end_date'
     end
+
+    # deprecated because we use datepicker
+    # it "has errors message" do
+      # TestHelpers::select_option('schedule_start_date_3i', 2)
+      # TestHelpers::select_option('schedule_end_date_3i', 1)
+      # click_button 'Create Schedule'
+      # page.should have_content("Start date is greater than end date")
+    # end
 
     it "has errors message" do
-      TestHelpers::select_option('schedule_start_date_3i', 2)
-      TestHelpers::select_option('schedule_end_date_3i', 1)
+      fill_in 'Start date', :with => '2012-01-31'
+      fill_in 'End date', :with => '2012-01-01'
       click_button 'Create Schedule'
       page.should have_content("Start date is greater than end date")
     end
@@ -52,16 +70,26 @@ describe 'schedules' do
       page.should have_selector "select[name='schedule[developer_id]']"
     end
 
-    it "has list of start date dropdown" do
-      page.should have_selector "select[name='schedule[start_date(1i)]']"
-      page.should have_selector "select[name='schedule[start_date(2i)]']"
-      page.should have_selector "select[name='schedule[start_date(3i)]']"
-    end
+    # deprecated because we use datepicker
+    # it "has list of start date dropdown" do
+      # page.should have_selector "select[name='schedule[start_date(1i)]']"
+      # page.should have_selector "select[name='schedule[start_date(2i)]']"
+      # page.should have_selector "select[name='schedule[start_date(3i)]']"
+    # end
 
-    it "has list of end date dropdown" do
-      page.should have_selector "select[name='schedule[end_date(1i)]']"
-      page.should have_selector "select[name='schedule[end_date(2i)]']"
-      page.should have_selector "select[name='schedule[end_date(3i)]']"
+    it "has a start date field" do
+      page.should have_selector 'input#schedule_start_date'
+    end
+    
+    # deprecated because we use datepicker
+    # it "has list of end date dropdown" do
+      # page.should have_selector "select[name='schedule[end_date(1i)]']"
+      # page.should have_selector "select[name='schedule[end_date(2i)]']"
+      # page.should have_selector "select[name='schedule[end_date(3i)]']"
+    # end
+
+    it "has an end date field" do
+      page.should have_selector 'input#schedule_end_date'
     end
   end
 end
