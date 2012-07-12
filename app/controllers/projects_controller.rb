@@ -16,12 +16,15 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def edit
+  before_filter :only => [:edit, :update, :destroy, :show] do
     @project = Project.find(params[:id])
   end
 
+  def edit
+
+  end
+
   def update
-    @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
       redirect_to project_path(@project)
     else
@@ -30,13 +33,11 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path
   end
 
   def show
-    @project = Project.find(params[:id])
     @schedules = Schedule.find_all_by_project_id(params[:id])
   end
 end

@@ -16,12 +16,15 @@ class DevelopersController < ApplicationController
     end
   end
 
-  def edit
+  before_filter :only => [:edit, :update, :destroy] do
     @developer = Developer.find(params[:id])
   end
 
+  def edit
+
+  end
+
   def update
-    @developer = Developer.find(params[:id])
     if @developer.update_attributes(params[:developer])
       redirect_to developers_path
     else
@@ -30,7 +33,6 @@ class DevelopersController < ApplicationController
   end
 
   def destroy
-    @developer = Developer.find(params[:id])
     @developer.destroy
     redirect_to developers_path
   end
