@@ -21,8 +21,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -53,9 +51,15 @@ group :test do
   gem 'capybara'
 end
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 # twitter bootstrap
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # http://rubygems.org/gems/mini_colors-rails
 # http://rubydoc.info/gems/mini_colors-rails/1.0.5/frames
 gem "mini_colors-rails", "~> 1.0.5"
+
+# http://rubydoc.info/gems/jquery-ui-rails/1.0.0/frames
+gem 'jquery_datepicker'
