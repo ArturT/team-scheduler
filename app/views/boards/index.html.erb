@@ -38,7 +38,8 @@
       <td<%= if weekend? date then raw ' class="weekend"' end %>>
         <% dev.schedules.each do |schedule| %>
           <%# don't show project if weekend %>
-          <% if schedule.start_date <= date and schedule.end_date >= date and !weekend? date %>
+          <%# if schedule.start_date <= date and schedule.end_date >= date and !weekend? date %>
+          <% if schedule.start_date <= date and schedule.end_date >= date %>
             <span rel="tooltip" class="label label-success" title="<%= schedule.project.name %>">x</span><br />
           <% end %>
         <% end %>
