@@ -1,4 +1,4 @@
-<h1 class="page-header"><%= @project.name %></h1>
+<h1 class="page-header"><%= @project.name %> <%= link_to 'edit project', edit_project_path(@project), :class => 'btn btn-mini' %></h1>
 
 <% if @schedules.count > 0 %>
   <table class="table table-striped">

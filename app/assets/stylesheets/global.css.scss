@@ -16,3 +16,10 @@ td.action_td_with, th.action_td_with {
   //border: 2px solid $red_error_border;
   box-shadow: 0px 0px 10px $red_error_border;
 }
+
+// /projects/1
+h1, h2, h3, h4, h5, h6 {
+  .btn {
+    font-weight: normal;
+  }
+}
