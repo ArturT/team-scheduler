@@ -3,8 +3,10 @@ $blue: #97D4F2;
 
 // used in boards/index.html.erb
 #board_calendar {
-  td span[rel=tooltip] {
-    cursor: pointer;
+  td a[rel=tooltip] {
+    text-shadow: 0px 0px 4px black;
+    margin-top: 5px;
+    display: block;
   }
 
   .th_board_size {

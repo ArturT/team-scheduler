@@ -39,7 +39,7 @@
         <% dev.schedules.each do |schedule| %>
           <%# don't show project if weekend %>
           <% if schedule.start_date <= date and schedule.end_date >= date and !weekend? date %>
-            <span rel="tooltip" class="label label-success" title="<%= schedule.project.name %>">x</span><br />
+            <a href="<%= project_path(schedule.project.id) %>" rel="tooltip" class="label label-success" style="background:<%= schedule.project.color %>;" title="<%= schedule.project.name %>"><%= schedule.project.name[0] %></a>
           <% end %>
         <% end %>
       </td>
