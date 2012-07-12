@@ -99,6 +99,13 @@ describe ProjectsController do
       create(:project)
       expect{ post :destroy, :id => 1 }.to change{ Project.count }.by(-1)
     end
+
+    it "deleted project has no schedules" do
+      create(:project)
+      create(:developer)
+      create(:schedule)
+      expect{ post :destroy, :id => 1 }.to change{ Schedule.count }.by(-1)
+    end
   end
 
   describe "show" do

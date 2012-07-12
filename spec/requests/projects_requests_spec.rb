@@ -92,5 +92,11 @@ describe "projects" do
       click_link 'Back'
       page.should have_content 'ProjectName'
     end
+
+    it "show an empty list of schedules if developer was removed" do
+      Developer.destroy(1)
+      visit project_path(1)
+      page.should_not have_content "DevName"
+    end
   end
 end
