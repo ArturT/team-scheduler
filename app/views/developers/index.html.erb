@@ -16,7 +16,7 @@
       </td>
       <td>
         <%= link_to 'edit', edit_developer_path(dev), :class => 'btn btn-mini' %>
-        <%= link_to 'delete', developer_path(dev), :method => :delete, :class => 'btn btn-mini', :confirm => 'Are you sure?' %>
+        <%= link_to 'delete', developer_path(dev), :method => :delete, :class => 'btn btn-mini', :data => { :confirm => 'Are you sure?' } %>
       </td>
     </tr>
     <% end %>
