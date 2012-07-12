@@ -30,7 +30,7 @@ describe ProjectsController do
   describe "create" do
     context "when params are correct" do
       def dispatch
-        post :create, {:project => {:name => 'ProjectName'}}
+        post :create, {:project => {:name => 'ProjectName', :color => '#000000'}}
       end
 
       it "create project" do

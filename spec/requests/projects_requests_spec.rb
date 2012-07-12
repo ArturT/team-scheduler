@@ -35,7 +35,9 @@ describe "projects" do
     it "adds new project" do
       visit new_project_path
       page.should have_selector 'input', :name => 'name'
+      page.should have_selector 'input', :color => '#000000'
       fill_in 'Name', :with => 'ProjectName'
+      fill_in 'Color', :with => '#000000'
       click_button 'Create Project'
       page.should have_content('ProjectName')
     end
