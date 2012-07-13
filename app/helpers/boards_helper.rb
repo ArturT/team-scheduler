@@ -7,4 +7,18 @@ module BoardsHelper
       false
     end
   end
+
+  def today?(date)
+    date == Date.today
+  end
+
+  def color_column(date)
+    if weekend?(date)
+      ' class=weekend'
+    elsif today?(date)
+      ' class=today'
+    else
+      ''
+    end
+  end
 end

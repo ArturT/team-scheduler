@@ -18,6 +18,7 @@ describe "boards" do
       page.should have_content "Developer Timetable for " + Date.today.strftime("%B %Y")
     end
 
+
     it "has link to developers" do
       click_link 'Developers'
       page.should have_content "DevName"
@@ -41,6 +42,16 @@ describe "boards" do
     it "has link to next month" do
       click_link 'Next Month'
       page.should have_content Date.today.next_month.strftime("%B %Y")
+    end
+
+    it "highlights weekend dates" do
+      page.should have_xpath("//th[@class='weekend']")
+      page.should have_xpath("//td[@class='weekend']")
+    end
+
+    it "highlights today's date" do
+      page.should have_xpath("//th[@class='today']")
+      page.should have_xpath("//td[@class='today']")
     end
   end
 end
