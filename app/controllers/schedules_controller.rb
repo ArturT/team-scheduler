@@ -14,7 +14,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(params[:schedule])
     if @schedule.save
       flash[:notice] = 'Schedule was created.'
-      redirect_to project_path(params[:project_id])
+      redirect_to project_path(params[:schedule][:project_id])
     else
       find_project_and_developers
       render :new
@@ -22,7 +22,6 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -44,7 +43,11 @@ class SchedulesController < ApplicationController
 
   private
   def find_project_and_developers
-    @project = Project.find(params[:project_id])
+    if params[:project_id]
+      @project = Project.find(params[:project_id])
+    else
+      @projects = Project.all # using in dropdown list
+    end
     @developers = Developer.all
   end
 end

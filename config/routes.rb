@@ -6,6 +6,8 @@ TeamScheduler::Application.routes.draw do
   resources :projects do
     resources :schedules
   end
+  
+  resources :schedules, :only => [:new, :create]
 
   root :to => "home#index"
   match "boards" => 'boards/index', :as => 'boards'

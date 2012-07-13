@@ -1,4 +1,6 @@
-<h1 class="page-header">Developer Timetable for <%= @dates.first.strftime("%B %Y") %></h1>
+<h1 class="page-header">Developer Timetable for <%= @dates.first.strftime("%B %Y") %>
+  <%= link_to 'Add Developer to Project', new_schedule_path, :class => 'btn btn-primary', :style => 'float:right;' %>
+</h1>
 
 <ul class="pager">
   <li class="previous">
