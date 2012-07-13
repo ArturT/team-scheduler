@@ -80,7 +80,7 @@ describe 'schedules' do
     it "has a start date field" do
       page.should have_selector 'input#schedule_start_date'
     end
-    
+
     # deprecated because we use datepicker
     # it "has list of end date dropdown" do
       # page.should have_selector "select[name='schedule[end_date(1i)]']"
@@ -90,6 +90,37 @@ describe 'schedules' do
 
     it "has an end date field" do
       page.should have_selector 'input#schedule_end_date'
+    end
+  end
+
+  describe 'GET schedules/new' do
+    before do
+      create(:project)
+      create(:developer)
+      visit new_schedule_path()
+    end
+
+    it "has list of project dropdown" do
+      page.should have_selector "select[name='schedule[project_id]']"
+    end
+
+    it "has list of developer dropdown" do
+      page.should have_selector "select[name='schedule[developer_id]']"
+    end
+
+    it "has a start date field" do
+      page.should have_selector 'input#schedule_start_date'
+    end
+
+    it "has an end date field" do
+      page.should have_selector 'input#schedule_end_date'
+    end
+
+    it "has errors message" do
+      fill_in 'Start date', :with => '2012-01-31'
+      fill_in 'End date', :with => '2012-01-01'
+      click_button 'Create Schedule'
+      page.should have_content("Start date is greater than end date")
     end
   end
 end
