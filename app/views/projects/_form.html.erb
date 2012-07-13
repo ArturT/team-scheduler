@@ -1,8 +1,8 @@
-<%= form_for(project, :html => {:class => 'form-horizontal'}) do |f| %>
-<% if project.errors.any? %>
+<%= form_for(@project, :html => {:class => 'form-horizontal'}) do |f| %>
+<% if @project.errors.any? %>
 <div class="alert alert-error">
   <ul>
-    <% project.errors.full_messages.each do |msg| %>
+    <% @project.errors.full_messages.each do |msg| %>
     <li>
       <%= msg %>
     </li>
