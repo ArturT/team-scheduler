@@ -54,12 +54,12 @@ end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+# http://rubydoc.info/gems/jquery-ui-rails/1.0.0/frames
+gem 'jquery_datepicker'
+
 # twitter bootstrap
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # http://rubygems.org/gems/mini_colors-rails
 # http://rubydoc.info/gems/mini_colors-rails/1.0.5/frames
 gem "mini_colors-rails", "~> 1.0.5"
-
-# http://rubydoc.info/gems/jquery-ui-rails/1.0.0/frames
-gem 'jquery_datepicker'
