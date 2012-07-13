@@ -1,9 +1,14 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+    font-family: "Blanch";
+    src: url(blanch.otf);
+}
+
 body {
- background: #000 url("bg.jpg") top left;
- background-size: cover; 
+ background: #000 url("bg.jpg") top left no-repeat;
+ background-size: 100%; 
  text-align: center;
  font-family: arial, sans-serif;
  color: #fff;
@@ -14,19 +19,29 @@ body {
  width: 870px;
 
  .logo {
-   background: url("logo.png") top left no-repeat;
    width: 867px;
    height: 265px;
+   font-family: "Blanch";
    margin-bottom: 25%;
-   text-indent: -9999999px;
+   h1 {
+    font-weight: normal;
+    font-size: 212px;
+    margin: 0;
+    text-shadow: -4px 3px 4px black;
+   }
+   h2 {
+    font-weight: normal;
+    font-size: 68px;
+    margin: 0;
+   }
  }
  .button {
   color: #343434;
   text-decoration: none;
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 70px;
+  font-family: "Blanch";
   text-transform: uppercase;
-  padding: 10px 30px;
+  padding: 5px 30px;
 
   background: #fbef7e; /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
