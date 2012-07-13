@@ -2,4 +2,8 @@
   <h1>Team Scheduler</h1> 
   <h2>A quick way to discover who's working on what.</h2>
 </div>
-<%= link_to("Show me", boards_path, :class =>'button') %>
+
+<%= render 'layouts/notice' %>
+
+<%= link_to("Show me", boards_path, :class => 'button') %>
+<%= link_to("Login with Google", auth_google_path, :class => 'button') %>

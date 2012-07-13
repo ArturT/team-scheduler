@@ -42,7 +42,6 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem 'ruby_gntp'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
@@ -63,3 +62,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 # http://rubygems.org/gems/mini_colors-rails
 # http://rubydoc.info/gems/mini_colors-rails/1.0.5/frames
 gem "mini_colors-rails", "~> 1.0.5"
+
+# omniauth with google openid
+gem 'omniauth'
+gem 'omniauth-openid'

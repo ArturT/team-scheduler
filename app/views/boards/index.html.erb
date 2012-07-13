@@ -2,6 +2,8 @@
   <%= link_to 'Add Developer to Project', new_schedule_path, :class => 'btn btn-primary', :style => 'float:right;' %>
 </h1>
 
+<%= render 'layouts/notice' %>
+
 <ul class="pager">
   <li class="previous">
     <%= link_to raw('<i class="icon-circle-arrow-left"></i> Previous Month'), boards_path(:date => @dates.first.prev_month) %>

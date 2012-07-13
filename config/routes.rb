@@ -6,11 +6,13 @@ TeamScheduler::Application.routes.draw do
   resources :projects do
     resources :schedules
   end
-  
   resources :schedules, :only => [:new, :create]
 
   root :to => "home#index"
   match "boards" => 'boards/index', :as => 'boards'
+
+  match '/auth/google', :as => 'auth_google'
+  match '/auth/google/callback', to: "sessions#create"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
