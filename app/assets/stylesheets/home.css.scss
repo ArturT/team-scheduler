@@ -1,0 +1,55 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+ background: #000 url("bg.jpg") top left;
+ background-size: cover; 
+ text-align: center;
+ font-family: arial, sans-serif;
+ color: #fff;
+}
+
+.container {
+ margin: 13% auto;
+ width: 870px;
+
+ .logo {
+   background: url("logo.png") top left no-repeat;
+   width: 867px;
+   height: 265px;
+   margin-bottom: 25%;
+   text-indent: -9999999px;
+ }
+ .button {
+  color: #343434;
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 30px;
+
+  background: #fbef7e; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZWY3ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmY2RhMTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #fbef7e 0%, #fcda15 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbef7e), color-stop(100%,#fcda15)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #fbef7e 0%,#fcda15 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #fbef7e 0%,#fcda15 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #fbef7e 0%,#fcda15 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #fbef7e 0%,#fcda15 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbef7e', endColorstr='#fcda15',GradientType=0 ); /* IE6-8 */
+
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+
+  -moz-box-shadow: 0 0 3px 3px #343434;
+  -webkit-box-shadow: 0 0 3px 3px#343434;
+  box-shadow: 0 0 3px 3px #343434; 
+
+    &:hover {
+      background: #fcda15;
+    }
+  }
+}

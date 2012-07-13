@@ -1,12 +1,14 @@
 TeamScheduler::Application.routes.draw do
 
   resources :boards, :only => :index
+  resource :home, :only => :index
   resources :developers
   resources :projects do
     resources :schedules
   end
 
-  root :to => "boards#index"
+  root :to => "home#index"
+  match "boards" => 'boards/index', :as => 'boards'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

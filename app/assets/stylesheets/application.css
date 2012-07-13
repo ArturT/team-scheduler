@@ -10,7 +10,8 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
- *= require_tree .
+ *= require boards
+ *= require global
  *= require_tree ../../../vendor/assets/stylesheets/.
  *= require minicolors
  *= require jquery.ui.all
