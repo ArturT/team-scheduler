@@ -35,7 +35,7 @@ class DevelopersController < ApplicationController
 
   def destroy
     @developer.destroy
-    flash[:notice] = 'Developer was destroyed.'
+    flash[:notice] = 'Developer was deleted.'
     flash[:notice_class] = 'error'
     redirect_to developers_path()
   end

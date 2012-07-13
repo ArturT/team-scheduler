@@ -3,7 +3,6 @@
 <% if !flash[:notice].nil? %>
 <div class="alert alert-<%= flash[:notice_class].nil? ? 'success' : flash[:notice_class] %>">
   <button data-dismiss="alert" class="close" type="button">×</button>
-  <strong>Notice:</strong>
   <%= flash[:notice] %>
 </div>
 <% end %>
