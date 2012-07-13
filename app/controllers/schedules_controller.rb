@@ -13,6 +13,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(params[:schedule])
     if @schedule.save
+      flash[:notice] = 'Schedule was created.'
       redirect_to project_path(params[:project_id])
     else
       find_project_and_developers
@@ -26,6 +27,7 @@ class SchedulesController < ApplicationController
 
   def update
     if @schedule.update_attributes(params[:schedule])
+      flash[:notice] = 'Schedule was updated.'
       redirect_to project_path(params[:project_id])
     else
       find_project_and_developers
@@ -35,6 +37,8 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy
+    flash[:notice] = 'Schedule was destroyed.'
+    flash[:notice_class] = 'error'
     redirect_to project_path(params[:project_id])
   end
 

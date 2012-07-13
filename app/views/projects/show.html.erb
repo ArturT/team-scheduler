@@ -1,5 +1,7 @@
 <h1 class="page-header"><%= @project.name %> <%= link_to 'edit project', edit_project_path(@project), :class => 'btn btn-mini' %></h1>
 
+<%= render 'layouts/notice' %>
+
 <% if @schedules.count > 0 %>
   <table class="table table-striped">
     <thead>

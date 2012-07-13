@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
+      flash[:notice] = 'Project was created.'
       redirect_to project_path(@project)
     else
       render :new
@@ -21,11 +22,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
     if @project.update_attributes(params[:project])
+      flash[:notice] = 'Project was updated.'
       redirect_to project_path(@project)
     else
       render :edit
@@ -34,6 +35,8 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
+    flash[:notice] = 'Project was destroyed.'
+    flash[:notice_class] = 'error'
     redirect_to projects_path
   end
 

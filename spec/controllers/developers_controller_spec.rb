@@ -45,7 +45,7 @@ describe DevelopersController do
 
       it "redirect to index" do
         dispatch
-        response.should redirect_to developers_path
+        response.should redirect_to developers_path()
       end
     end
 
