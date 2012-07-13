@@ -53,5 +53,10 @@ describe "boards" do
       page.should have_xpath("//th[@class='today']")
       page.should have_xpath("//td[@class='today']")
     end
+
+    it "has a button to add new developer to project" do
+      visit boards_path
+      page.should have_selector 'a.btn', :value => 'Add Developer to Project'
+    end
   end
 end
