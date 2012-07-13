@@ -2,13 +2,13 @@
 
 <ul class="pager">
   <li class="previous">
-    <%= link_to raw('<i class="icon-circle-arrow-left"></i> Previous Month'), root_path(:date => @dates.first.prev_month) %>
+    <%= link_to raw('<i class="icon-circle-arrow-left"></i> Previous Month'), boards_path(:date => @dates.first.prev_month) %>
   </li>
   <li>
-    <%= link_to 'Current Month', root_path(:date => Date.today) %>
+    <%= link_to 'Current Month', boards_path(:date => Date.today) %>
   </li>
   <li class="next">
-    <%= link_to raw('Next Month <i class="icon-circle-arrow-right"></i>'), root_path(:date => @dates.first.next_month) %>
+    <%= link_to raw('Next Month <i class="icon-circle-arrow-right"></i>'), boards_path(:date => @dates.first.next_month) %>
   </li>
 </ul>
 
