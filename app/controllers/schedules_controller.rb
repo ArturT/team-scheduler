@@ -37,7 +37,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy
-    flash[:notice] = 'Schedule was destroyed.'
+    flash[:notice] = 'Schedule was deleted.'
     flash[:notice_class] = 'error'
     redirect_to project_path(params[:project_id])
   end

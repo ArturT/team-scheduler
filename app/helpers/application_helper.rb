@@ -5,7 +5,7 @@ module ApplicationHelper
   # @return string link to path
   def menu_item(title, path, options = {})
     options.reverse_merge!(:class => '')
-    puts request.path
+    #puts request.path
     if (request.path.match(/#{path}/) && path != "/") || (request.path == "/" && path == "/")
       options[:class] << ' active'
     end
@@ -18,7 +18,7 @@ module ApplicationHelper
   # @return string <li> element with class="active"
   def li_menu_item(title, path, options = {})
     options.reverse_merge!(:class => '')
-    puts request.path
+    #puts request.path
     if (request.path.match(/#{path}/) && path != "/") || (request.path == "/" && path == "/")
       raw '<li class="active">' << link_to(title, path, options) << '</li>'
     else
