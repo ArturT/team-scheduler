@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :authenticated
+
   def create
     if auth_hash
       domain = auth_hash.info.email.split("@")[1]
@@ -8,11 +10,21 @@ class SessionsController < ApplicationController
         flash[:notice] = "Successfully logged into the " + company.name + " account"
         redirect_to boards_path
       else
-        flash[:notice] = "Cannot login with this Google Account"
+        flash[:notice] = "Cannot login with this Google account"
         flash[:notice_class] = "error"
         redirect_to root_path
       end
+    else
+      flash[:notice] = "You must be logged in to view this page"
+      flash[:notice_class] = "error"
+      redirect_to root_path
     end
+  end
+
+  def failure
+    flash[:notice] = "You must be logged in to view this page"
+    flash[:notice_class] = "error"
+    redirect_to root_path
   end
 
   private
