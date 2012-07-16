@@ -1,6 +1,6 @@
-class BoardsController < ApplicationController
+class BoardController < ApplicationController
   def index
-    @developers = Developer.includes(:schedules => [:project]).all
+    @company = Company.find_by_name(session[:authenticated])
 
     # to_s is required if params[:date] is empty
     if params[:date].to_s.date?
