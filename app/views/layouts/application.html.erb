@@ -13,9 +13,11 @@
       <div class="container">
         <%= link_to 'Team Scheduler', board_index_path, :class => 'brand' %>
         <ul class="nav">
-          <%= li_menu_item session[:authenticated], board_index_path %>
+          <%= li_menu_item session[:authenticated] + ' Board', board_index_path %>
           <%= li_menu_item 'Developers', developers_path %>
           <%= li_menu_item 'Projects', projects_path %>
+        </ul>
+        <ul class="nav pull-right">
           <%= li_menu_item 'Logout', logout_path %>
         </ul>
       </div>
