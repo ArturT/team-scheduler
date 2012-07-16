@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe DevelopersController do
   before do
+    create(:company)
     controller.should_receive(:authenticated)
+    session[:authenticated] = "CompanyName"
   end
 
   describe "index" do
@@ -15,7 +17,7 @@ describe DevelopersController do
       developer = build(:developer)
       developer.save
       get :index
-      assigns(:developers).should == [developer]
+      assigns(:company).developers.first.should == developer
     end
   end
 
@@ -34,7 +36,7 @@ describe DevelopersController do
   describe "create" do
     context "when params are correct" do
       def dispatch
-        post :create, {:developer => {:name => 'DevName'}}
+        post :create, {:developer => {:name => 'DevName', :company_id => 1}}
       end
 
       it "create developer" do

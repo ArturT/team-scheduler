@@ -1,14 +1,16 @@
 require 'spec_helper'
 
-describe BoardsController do
+describe BoardController do
   before do
+    create(:company)
+    create(:developer)
     controller.should_receive(:authenticated)
+    session[:authenticated] = "CompanyName"
   end
 
   describe "index" do
     context "no date in the parameters" do
       before do
-        create(:developer)
         get :index
       end
 
@@ -17,8 +19,8 @@ describe BoardsController do
       end
 
       it "has a list of all developers" do
-        developers = assigns(:developers)
-        developers.count.should == 1
+        company = assigns(:company)
+        company.developers.count.should == 1
       end
 
       it "has current date" do
@@ -33,7 +35,6 @@ describe BoardsController do
 
     context "date set in parameters" do
       before do
-        create(:developer)
         get :index, :date => Date.today.next_month
       end
 

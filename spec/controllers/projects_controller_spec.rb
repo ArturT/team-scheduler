@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe ProjectsController do
   before do
+    create(:company)
     controller.should_receive(:authenticated)
+    session[:authenticated] = "CompanyName"
   end
 
   describe "index" do
@@ -15,7 +17,7 @@ describe ProjectsController do
       project = build(:project)
       project.save
       get :index
-      assigns(:projects).should == [project]
+      assigns(:company).projects.first.should == project
     end
   end
 
@@ -34,7 +36,7 @@ describe ProjectsController do
   describe "create" do
     context "when params are correct" do
       def dispatch
-        post :create, {:project => {:name => 'ProjectName', :color => '#000000'}}
+        post :create, {:project => {:name => 'ProjectName', :color => '#000000', :company_id => 1}}
       end
 
       it "create project" do

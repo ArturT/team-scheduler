@@ -2,7 +2,9 @@ require "spec_helper"
 
 describe SchedulesController do
   before do
+    create(:company)
     controller.should_receive(:authenticated)
+    session[:authenticated] = "CompanyName"
   end
 
   describe "new" do

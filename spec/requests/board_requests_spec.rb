@@ -11,7 +11,7 @@ describe "Boards Requests" do
       create(:developer)
       create(:project)
       create(:schedule)
-      visit boards_path
+      visit board_index_path
     end
 
     it "render boards template" do
@@ -60,7 +60,7 @@ describe "Boards Requests" do
     end
 
     it "has a button to add new developer to project" do
-      visit boards_path
+      visit board_index_path
       page.should have_selector 'a.btn', :value => 'Add Developer to Project'
     end
   end
