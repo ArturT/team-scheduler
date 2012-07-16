@@ -7,23 +7,20 @@ class SessionsController < ApplicationController
       company = Company.find_by_domain(domain)
       if company
         session[:authenticated] = true
-        flash[:notice] = "Successfully logged into the " + company.name + " account"
+        flash[:success] = "Successfully logged into the " + company.name + " account"
         redirect_to boards_path
       else
-        flash[:notice] = "Cannot login with this Google account"
-        flash[:notice_class] = "error"
+        flash[:error] = "Cannot login with this Google account"
         redirect_to root_path
       end
     else
-      flash[:notice] = "You must be logged in to view this page"
-      flash[:notice_class] = "error"
+      flash[:error] = "You must be logged in to view this page"
       redirect_to root_path
     end
   end
 
   def failure
-    flash[:notice] = "You must be logged in to view this page"
-    flash[:notice_class] = "error"
+    flash[:error] = "You must be logged in to view this page"
     redirect_to root_path
   end
 

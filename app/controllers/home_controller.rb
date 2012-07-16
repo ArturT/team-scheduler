@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 
   def logout
     session[:authenticated] = false
-    flash[:notice] = "You have logged out"
+    flash[:success] = "You have logged out"
     redirect_to root_path
   end
 end

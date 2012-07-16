@@ -1,8 +1,32 @@
-<%# @param flash[:notice] message text %>
-<%# @param flash[:notice_class] css class for alert div (error, info, success). Default success. %>
-<% if !flash[:notice].nil? %>
-<div class="alert alert-<%= flash[:notice_class].nil? ? 'success' : flash[:notice_class] %>">
+<%# @param flash[:success] message text in green box %>
+<%# @param flash[:error] message text in red box %>
+<%# @param flash[:info] message text in blue box %>
+<%# @param flash[:warning] message text in yellow box %>
+
+<% if !flash[:success].nil? %>
+<div class="alert alert-success">
   <button data-dismiss="alert" class="close" type="button">×</button>
-  <%= flash[:notice] %>
+  <%= flash[:success] %>
+</div>
+<% end %>
+
+<% if !flash[:error].nil? %>
+<div class="alert alert-error">
+  <button data-dismiss="alert" class="close" type="button">×</button>
+  <%= flash[:error] %>
+</div>
+<% end %>
+
+<% if !flash[:info].nil? %>
+<div class="alert alert-info">
+  <button data-dismiss="alert" class="close" type="button">×</button>
+  <%= flash[:info] %>
+</div>
+<% end %>
+
+<% if !flash[:warning].nil? %>
+<div class="alert alert-block">
+  <button data-dismiss="alert" class="close" type="button">×</button>
+  <%= flash[:warning] %>
 </div>
 <% end %>
