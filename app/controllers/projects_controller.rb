@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
+  before_filter :find_company_by_name, :only => [:index, :new, :edit]
+  before_filter :find_project_by_id, :only => [:edit, :update, :destroy, :show]
+
   def index
-    @projects = Project.all
   end
 
   def new
@@ -17,9 +19,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  before_filter :only => [:edit, :update, :destroy, :show] do
-    @project = Project.find(params[:id])
-  end
 
   def edit
   end
@@ -42,5 +41,14 @@ class ProjectsController < ApplicationController
 
   def show
     @schedules = Schedule.find_all_by_project_id(params[:id])
+  end
+
+  private
+  def find_company_by_name
+    @company = Company.find_by_name(session[:authenticated])
+  end
+
+  def find_project_by_id
+    @project = Project.find(params[:id])
   end
 end

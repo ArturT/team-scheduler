@@ -1,9 +1,6 @@
 class SchedulesController < ApplicationController
   before_filter :find_project_and_developers, :only => [:new, :edit]
-
-  before_filter :only => [:edit, :update, :destroy] do
-    @schedule = Schedule.find(params[:id])
-  end
+  before_filter :find_project_by_id, :only => [:edit, :update, :destroy]
 
   def new
     @schedule = Schedule.new
@@ -42,11 +39,16 @@ class SchedulesController < ApplicationController
 
   private
   def find_project_and_developers
+    company = Company.find_by_name(session[:authenticated])
     if params[:project_id]
       @project = Project.find(params[:project_id])
     else
-      @projects = Project.all # using in dropdown list
+      @projects = company.projects
     end
-    @developers = Developer.all
+    @developers = company.developers
+  end
+
+  def find_project_by_id
+    @schedule = Schedule.find(params[:id])
   end
 end
