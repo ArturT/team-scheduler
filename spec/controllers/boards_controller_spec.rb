@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe BoardsController do
+  before do
+    controller.should_receive(:authenticated)
+  end
+
   describe "index" do
     context "no date in the parameters" do
       before do

@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe SchedulesController do
+  before do
+    controller.should_receive(:authenticated)
+  end
+
   describe "new" do
     before do
       create(:project)

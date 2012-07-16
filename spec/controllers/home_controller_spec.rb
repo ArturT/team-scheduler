@@ -7,4 +7,8 @@ describe HomeController do
       response.should render_template("index")
     end
   end
+
+  describe "logout" do
+    pending
+  end
 end

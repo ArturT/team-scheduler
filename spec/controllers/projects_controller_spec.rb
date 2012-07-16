@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ProjectsController do
+  before do
+    controller.should_receive(:authenticated)
+  end
+
   describe "index" do
     it "renders index template" do
       get :index
