@@ -1,7 +1,7 @@
 TeamScheduler::Application.routes.draw do
 
   resources :boards, :only => :index
-  resource :home, :only => :index
+  resources :home, :only => [:index, :logout]
   resources :developers
   resources :projects do
     resources :schedules
@@ -12,7 +12,10 @@ TeamScheduler::Application.routes.draw do
   match "boards" => 'boards/index', :as => 'boards'
 
   match '/auth/google', :as => 'auth_google'
-  match '/auth/google/callback', to: "sessions#create"
+  match '/auth/google/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
+
+  match '/logout', :to => 'home#logout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
