@@ -13,7 +13,7 @@
       <div class="container">
         <a class="brand" href="/boards"> Team Scheduler </a>
         <ul class="nav">
-          <%= li_menu_item 'Boards', boards_path %>
+          <%= li_menu_item session[:authenticated], board_index_path %>
           <%= li_menu_item 'Developers', developers_path %>
           <%= li_menu_item 'Projects', projects_path %>
           <%= li_menu_item 'Logout', logout_path %>

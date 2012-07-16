@@ -2,8 +2,8 @@
 
 <%= render 'layouts/notice' %>
 
-<% if @developers.count > 0 %>
-<table class="table table-striped">
+<% if @company.developers.count > 0 %>
+  <table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @developers.each do |dev| %>
+    <% @company.developers.each do |dev| %>
     <tr>
       <td>
         <%= dev.name %>
@@ -23,9 +23,9 @@
     </tr>
     <% end %>
   </tbody>
-</table>
+  </table>
 <% else %>
-<div class="alert alert-block">There is no developers.</div>
+<div class="alert alert-block">There are no developers.</div>
 <% end %>
 
 <div class="form-actions">

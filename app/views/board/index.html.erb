@@ -1,4 +1,4 @@
-<h1 class="page-header">Developer Timetable for <%= @dates.first.strftime("%B %Y") %>
+<h1 class="page-header"><%= @company.name %> Developer Timetable for <%= @dates.first.strftime("%B %Y") %>
   <%= link_to 'Add Developer to Project', new_schedule_path, :class => 'btn btn-primary', :style => 'float:right;' %>
 </h1>
 
@@ -36,7 +36,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @developers.each do |dev| %>
+    <% @company.developers.each do |dev| %>
     <tr>
       <td><%= dev.name %></td>
       <% @dates.each do |date| %>
