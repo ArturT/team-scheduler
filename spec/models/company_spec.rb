@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Company do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "validates presence of name" do
+    build(:company, :name => '').should_not be_valid
+  end
+  it "validates presence of domain" do
+    build(:company, :domain => '').should_not be_valid
+  end
 end
