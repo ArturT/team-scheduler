@@ -15,7 +15,7 @@ TeamScheduler::Application.routes.draw do
   match '/auth/google/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
-  match '/logout', :to => 'home#logout'
+  match '/logout', :to => 'sessions#logout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
