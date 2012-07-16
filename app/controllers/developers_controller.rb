@@ -12,7 +12,7 @@ class DevelopersController < ApplicationController
   def create
     @developer = Developer.new(params[:developer])
     if @developer.save
-      flash[:notice] = 'Developer was created.'
+      flash[:success] = 'Developer was created.'
       redirect_to developers_path()
     else
       render :new
@@ -24,7 +24,7 @@ class DevelopersController < ApplicationController
 
   def update
     if @developer.update_attributes(params[:developer])
-      flash[:notice] = 'Developer was updated.'
+      flash[:success] = 'Developer was updated.'
       redirect_to developers_path()
     else
       render :edit
@@ -33,8 +33,7 @@ class DevelopersController < ApplicationController
 
   def destroy
     @developer.destroy
-    flash[:notice] = 'Developer was deleted.'
-    flash[:notice_class] = 'error'
+    flash[:info] = 'Developer was deleted.'
     redirect_to developers_path()
   end
 

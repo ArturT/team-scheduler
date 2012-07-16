@@ -11,7 +11,7 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/boards"> Team Scheduler </a>
+        <%= link_to 'Team Scheduler', boards_path, :class => 'brand' %>
         <ul class="nav">
           <%= li_menu_item session[:authenticated], board_index_path %>
           <%= li_menu_item 'Developers', developers_path %>

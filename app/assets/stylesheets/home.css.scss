@@ -12,7 +12,7 @@
 
 body {
  background: #000 url("bg.jpg") top left no-repeat;
- background-size: 100%; 
+ background-size: 100%;
  text-align: center;
  font-family: arial, sans-serif;
  color: #fff;
@@ -65,7 +65,7 @@ body {
 
   -moz-box-shadow: 0 0 3px 3px #343434;
   -webkit-box-shadow: 0 0 3px 3px#343434;
-  box-shadow: 0 0 3px 3px #343434; 
+  box-shadow: 0 0 3px 3px #343434;
 
     &:hover {
       background: #fcda15;
@@ -74,14 +74,26 @@ body {
 }
 
 // style only for notice at /home/index
-.alert-error {
-  background-color: #B94A48;
-  color: #EED3D7;
-  padding: 15px;
+.alert {
   border-radius: 7px;
   margin-bottom: 50px;
+  padding: 15px;
+  position:absolute;
+  width: 30%;
+  top: 20%;
+  left: 35%;
 
   button.close {
     display: none;
   }
+}
+
+.alert-error {
+  background-color: #B94A48;
+  color: #EED3D7;
+}
+
+.alert-success {
+  background-color: #468847;
+  color: #D6E9C6;
 }

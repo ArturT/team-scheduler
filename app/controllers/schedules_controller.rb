@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(params[:schedule])
     if @schedule.save
-      flash[:notice] = 'Schedule was created.'
+      flash[:success] = 'Schedule was created.'
       redirect_to project_path(params[:schedule][:project_id])
     else
       find_project_and_developers
@@ -22,7 +22,7 @@ class SchedulesController < ApplicationController
 
   def update
     if @schedule.update_attributes(params[:schedule])
-      flash[:notice] = 'Schedule was updated.'
+      flash[:success] = 'Schedule was updated.'
       redirect_to project_path(params[:project_id])
     else
       find_project_and_developers
@@ -32,8 +32,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy
-    flash[:notice] = 'Schedule was deleted.'
-    flash[:notice_class] = 'error'
+    flash[:info] = 'Schedule was deleted.'
     redirect_to project_path(params[:project_id])
   end
 
