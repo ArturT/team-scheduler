@@ -1,7 +1,12 @@
 require 'spec_helper'
 require 'helpers/test_helpers'
 
-describe 'schedules' do
+describe 'Schedules Requests' do
+
+  before do
+    pending
+  end
+
   describe 'GET project/:project_id/schedules/new' do
     before do
       create(:project)

@@ -1,6 +1,11 @@
 require "spec_helper"
 
-describe "boards" do
+describe "Boards Requests" do
+
+  before do
+    pending
+  end
+
   describe "GET /boards" do
     before do
       create(:developer)

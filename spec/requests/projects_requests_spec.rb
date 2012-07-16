@@ -1,6 +1,11 @@
 require 'spec_helper'
 
-describe "projects" do
+describe "Projects Requests" do
+
+  before do
+    pending
+  end
+
   describe "GET /projects" do
     before do
       create(:project)

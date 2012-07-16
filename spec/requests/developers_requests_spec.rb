@@ -1,6 +1,11 @@
 require 'spec_helper'
 
-describe "developers" do
+describe "Developers Specs" do
+
+  before do
+    pending
+  end
+
   describe "GET /developers" do
     before do
       create(:developer)
