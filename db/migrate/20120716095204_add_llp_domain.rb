@@ -3,4 +3,3 @@ class AddLlpDomain < ActiveRecord::Migration
     Company.new(:name => "Lunar Logic", :domain => "llp.pl").save
   end
 end
-rspec
