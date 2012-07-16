@@ -72,3 +72,16 @@ body {
     }
   }
 }
+
+// style only for notice at /home/index
+.alert-error {
+  background-color: #B94A48;
+  color: #EED3D7;
+  padding: 15px;
+  border-radius: 7px;
+  margin-bottom: 50px;
+
+  button.close {
+    display: none;
+  }
+}
