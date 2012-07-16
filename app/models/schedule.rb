@@ -3,8 +3,8 @@ class Schedule < ActiveRecord::Base
   delegate :name, :to => :developer, :prefix => true
   belongs_to :project
   delegate :name, :color, :to => :project, :prefix => true
-
   attr_accessible :developer_id, :end_date, :project_id, :start_date
+
   validates :developer_id, :presence => true
   validates :project_id, :presence => true
   validates :start_date, :presence => true
