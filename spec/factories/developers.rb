@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :developer do
     name "DevName"
-    company_id 1
+    company
   end
 end
