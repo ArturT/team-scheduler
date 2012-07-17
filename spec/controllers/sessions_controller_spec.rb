@@ -1,23 +1,25 @@
 require 'spec_helper'
 
 describe SessionsController do
-  describe "create" do
-    before do
-      create(:company)
-    end
 
+  let(:company) { create(:company) }
+  let(:developer) { create(:developer, :company => company) }
+  let(:project) { create(:project, :company => company) }
+  let(:schedule) { create(:schedule, :project => project) }
+
+  describe "create" do
     context "has company domain that is in the db" do
       before do
-        controller.stub!(:get_domain).and_return("company.com")
+        controller.stub!(:get_domain).and_return(company.domain)
         get :create
       end
 
       it "sets session variable to the company name" do
-        session[:authenticated].should == "CompanyName"
+        session[:authenticated].should == company.name
       end
 
       it "sets a success message" do
-        flash[:success].should == "Successfully logged into the CompanyName account."
+        flash[:success].should == "Successfully logged into the " + company.name + " account."
       end
 
       it "redirects to board view" do

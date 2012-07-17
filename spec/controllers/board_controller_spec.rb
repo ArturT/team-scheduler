@@ -1,16 +1,21 @@
 require 'spec_helper'
 
 describe BoardController do
+
+  let(:company) { create(:company) }
+  let(:developer) { create(:developer, :company => company) }
+  let(:project) { create(:project, :company => company) }
+  let(:schedule) { create(:schedule, :project => project) }
+
   before do
-    create(:company)
-    create(:developer)
     controller.should_receive(:authenticated)
-    session[:authenticated] = "CompanyName"
+    session[:authenticated] = company.name
   end
 
   describe "index" do
     context "no date in the parameters" do
       before do
+        create(:schedule, :developer => developer, :project => project)
         get :index
       end
 
@@ -34,11 +39,8 @@ describe BoardController do
     end
 
     context "date set in parameters" do
-      before do
-        get :index, :date => Date.today.next_month
-      end
-
       it "has the date passed in params" do
+        get :index, :date => Date.today.next_month
         assigns(:date).should == Date.today.next_month
       end
     end

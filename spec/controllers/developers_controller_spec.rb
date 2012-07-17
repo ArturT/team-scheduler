@@ -1,34 +1,42 @@
 require 'spec_helper'
 
 describe DevelopersController do
+
+  let(:company) { create(:company) }
+  let(:developer) { create(:developer, :company => company) }
+  let(:project) { create(:project, :company => company) }
+  let(:schedule) { create(:schedule, :project => project) }
+
   before do
-    create(:company)
     controller.should_receive(:authenticated)
-    session[:authenticated] = "CompanyName"
+    session[:authenticated] = company.name
   end
 
   describe "index" do
-    it "renders index template" do
+    before do
+      @developer = create(:developer, :company => company)
       get :index
+    end
+
+    it "renders index template" do
       response.should render_template("index")
     end
 
     it "assigns developers variable" do
-      developer = build(:developer)
-      developer.save
-      get :index
-      assigns(:company).developers.first.should == developer
+      assigns(:company).developers.first.should == @developer
     end
   end
 
   describe "new" do
-    it "renders new form template" do
+    before do
       get :new
+    end
+
+    it "renders new form template" do
       response.should render_template("new")
     end
 
     it "assigns new developer variable" do
-      get :new
       assigns(:developer).should be_a_new(Developer)
     end
   end
@@ -36,13 +44,12 @@ describe DevelopersController do
   describe "create" do
     context "when params are correct" do
       def dispatch
-        post :create, {:developer => {:name => 'DevName', :company_id => 1}}
+        post :create, {:developer => {:name => 'CreatedName', :company_id => company.id}}
       end
 
       it "create developer" do
         dispatch
-        developer = assigns(:developer)
-        developer.name.should == "DevName"
+        assigns(:developer).name.should == "CreatedName"
       end
 
       it "saves to db" do
@@ -51,12 +58,12 @@ describe DevelopersController do
 
       it "redirect to index" do
         dispatch
-        response.should redirect_to developers_path()
+        response.should redirect_to developers_path
       end
     end
 
     context "when params are incorrect" do
-      it "developer's name is empty" do
+      it "has empty developer name" do
         post :create
         response.should render_template("new")
       end
@@ -65,36 +72,34 @@ describe DevelopersController do
 
   describe "edit" do
     it "gets the developer from the db" do
-      create(:developer)
-      get :edit, {:id => 1}
-      developer = assigns(:developer)
-      developer.name.should == "DevName"
+      get :edit, {:id => developer.id}
+      assigns(:developer).name.should == "DevName"
     end
   end
 
   describe "update" do
-    before do
-      create(:developer)
-    end
-
     context "when params are correct" do
       it "gets developer from db" do
-        post :update, {:id => 1}
-        developer = assigns(:developer)
-        developer.name.should == "DevName"
+        post :update, {:id => developer.id}
+        assigns(:developer).name.should == "DevName"
+      end
+
+      def dispatch
+        post :update, {:id => developer.id, :developer => {:name => "ChangedName", :company_id => company.id}}
       end
 
       it "updates developer in db" do
-        before = Developer.find(1).name
-        post :update, {:id => 1, :developer => {:name => "ChangedName"}}
-        after = Developer.find(1).name
-        before.should_not == after
+        Developer.find(developer.id).name.should == "DevName"
+        dispatch
+        Developer.find(developer.id).name.should == "ChangedName"
+
+        #expect { dispatch }.to change(Developer.find(developer.id), :name).from("DevName").to("ChangedName")
       end
     end
 
     context "when params are incorrect" do
       it "update attributes fails" do
-        post :update, {:id => 1, :developer => {:name => ""}}
+        post :update, {:id => developer.id, :developer => {:name => "", :company_id => company.id}}
         response.should render_template("edit")
       end
     end
@@ -102,8 +107,8 @@ describe DevelopersController do
 
   describe "destroy" do
     it "delete developer" do
-      create(:developer)
-      expect{ post :destroy, {:id => 1} }.to change{ Developer.count }.by(-1)
+      developer = create(:developer, :company => company)
+      expect{ post :destroy, {:id => developer.id} }.to change{ Developer.count }.by(-1)
     end
   end
 end
