@@ -22,8 +22,8 @@
       <th class="th_board_size">
          Developer<br />Name
       </th>
+      <th></th>
       <% @dates.each do |date| %>
-
         <th<%= color_column(date) %>>
           <div class="weekday_name_container">
             <div class="weekday_name">
@@ -39,6 +39,14 @@
     <% @company.developers.each do |dev| %>
     <tr>
       <td><%= dev.name %></td>
+      <td>
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle"><i class="icon-cog"></i></button>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="icon-ok"></i> Approve your month time</a></li>
+          </ul>
+        </div>
+      </td>
       <% @dates.each do |date| %>
       <td<%= color_column(date) %>>
         <% dev.schedules.each do |schedule| %>
