@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :schedules, :dependent => :destroy
+  belongs_to :company
   attr_accessible :name, :color, :company_id
 
   validates :name, :presence => true
