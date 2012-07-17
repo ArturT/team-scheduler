@@ -14,9 +14,10 @@ $blue: #97D4F2;
       padding: 3px 6px 3px 6px;
       text-decoration: none;
       position: absolute;
-      left: 0px;
+      left: 1px;
       top: -6px;
       overflow: visible;
+      font-size: 10px;
     }
 
     a[rel=tooltip]:hover {
@@ -47,6 +48,11 @@ $blue: #97D4F2;
     position: relative;
     top: 0px;
     right: -5px;
+
+    // Action label in views/board/index.html.erb
+    span {
+      color: #000;
+    }
   }
 
   .weekend {
