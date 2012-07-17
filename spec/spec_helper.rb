@@ -58,6 +58,8 @@ Spork.prefork do
     config.after(:each) do
       DatabaseCleaner.clean
     end
+
+    config.include LoginHelper, :type => :request
   end
 end
 
