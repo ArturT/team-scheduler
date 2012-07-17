@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Projects Requests" do
 
   before do
-    pending
+    login_with_google_auth
   end
 
   describe "GET /projects" do
@@ -37,8 +37,11 @@ describe "Projects Requests" do
   end
 
   describe "GET /projects/new" do
-    it "adds new project" do
+    before do
       visit new_project_path
+    end
+
+    it "adds new project" do
       page.should have_selector 'input', :name => 'name'
       page.should have_selector 'input', :color => '#000000'
       fill_in 'Name', :with => 'ProjectName'
@@ -48,7 +51,6 @@ describe "Projects Requests" do
     end
 
     it "has errors message" do
-      visit new_project_path
       click_button 'Create Project'
       page.should have_content("can't be blank")
     end

@@ -3,12 +3,12 @@ require 'spec_helper'
 describe "Developers Specs" do
 
   before do
-    pending
+    login_with_google_auth
+    create(:developer)
   end
 
   describe "GET /developers" do
     before do
-      create(:developer)
       visit developers_path
     end
 
@@ -37,15 +37,17 @@ describe "Developers Specs" do
   end
 
   describe "GET /developers/new" do
-    it "adds new developer" do
+    before do
       visit new_developer_path
+    end
+
+    it "adds new developer" do
       page.should have_selector "input", :name => 'name'
       fill_in 'Name', :with => 'ChangeName'
       click_button 'Create Developer'
     end
 
     it "has errors message" do
-      visit new_developer_path
       click_button 'Create Developer'
       page.should have_content("can't be blank")
     end

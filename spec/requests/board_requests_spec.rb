@@ -3,14 +3,14 @@ require "spec_helper"
 describe "Boards Requests" do
 
   before do
-    pending
+    login_with_google_auth
+    create(:developer)
+    create(:project)
+    create(:schedule)
   end
 
   describe "GET /boards" do
     before do
-      create(:developer)
-      create(:project)
-      create(:schedule)
       visit board_index_path
     end
 
