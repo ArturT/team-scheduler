@@ -2,15 +2,18 @@ require 'spec_helper'
 
 describe 'Schedules Requests' do
 
+  let(:company) { create(:company) }
+  let(:developer) { create(:developer, :company => company) }
+  let(:project) { create(:project, :company => company) }
+  let(:schedule) { create(:schedule, :project => project) }
+
   before do
     login_with_google_auth
-    create(:project)
   end
 
   describe 'GET project/:project_id/schedules/new' do
     before do
-      create(:developer)
-      visit new_project_schedule_path(:project_id => 1)
+      visit new_project_schedule_path(:project_id => project.id)
     end
 
     it "has a project name field" do
@@ -32,15 +35,14 @@ describe 'Schedules Requests' do
     it "has errors message" do
       fill_in 'Start date', :with => '2012-01-31'
       fill_in 'End date', :with => '2012-01-01'
-      click_button 'Create Schedule'
+      click_on 'Create Schedule'
       page.should have_content("Start date is greater than end date")
     end
   end
 
   describe 'GET project/:project_id/schedules/:id/edit' do
     before do
-      create(:schedule)
-      visit edit_project_schedule_path(:id => 1, :project_id => 1)
+      visit edit_project_schedule_path(:id => schedule.id, :project_id => project.id)
     end
 
     it "has a project name field" do
@@ -62,8 +64,7 @@ describe 'Schedules Requests' do
 
   describe 'GET schedules/new' do
     before do
-      create(:developer)
-      visit new_schedule_path()
+      visit new_schedule_path
     end
 
     it "has list of project dropdown" do
@@ -85,7 +86,7 @@ describe 'Schedules Requests' do
     it "has errors message" do
       fill_in 'Start date', :with => '2012-01-31'
       fill_in 'End date', :with => '2012-01-01'
-      click_button 'Create Schedule'
+      click_on 'Create Schedule'
       page.should have_content("Start date is greater than end date")
     end
   end

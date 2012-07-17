@@ -2,13 +2,18 @@ require 'spec_helper'
 
 describe "Developers Specs" do
 
+  let(:company) { create(:company) }
+  let(:developer) { create(:developer, :company => company) }
+  let(:project) { create(:project, :company => company) }
+  let(:schedule) { create(:schedule, :project => project) }
+
   before do
-    login_with_google_auth
-    create(:developer)
+    login_with_google_auth(company)
   end
 
   describe "GET /developers" do
     before do
+      create(:developer, :company => company)
       visit developers_path
     end
 
@@ -19,19 +24,19 @@ describe "Developers Specs" do
 
     it "has edit link" do
       page.should have_link 'edit'
-      click_link 'edit'
+      click_on 'edit'
       page.should have_selector 'input', :value => 'DevName'
     end
 
     it "has delete link" do
       page.should have_link 'delete'
-      click_link 'delete'
+      click_on 'delete'
       page.should_not have_content 'DevName'
     end
 
     it "has new developer link" do
       page.should have_link 'Add New Developer'
-      click_link 'Add New Developer'
+      click_on 'Add New Developer'
       page.should have_selector 'input', :name => 'name'
     end
   end
@@ -43,23 +48,24 @@ describe "Developers Specs" do
 
     it "adds new developer" do
       page.should have_selector "input", :name => 'name'
-      fill_in 'Name', :with => 'ChangeName'
-      click_button 'Create Developer'
+      fill_in 'Name', :with => 'AddNewName'
+      click_on 'Create Developer'
+      page.should have_content 'AddNewName'
     end
 
     it "has errors message" do
-      click_button 'Create Developer'
+      click_on 'Create Developer'
       page.should have_content("can't be blank")
     end
   end
 
   describe "GET /developers/edit" do
     it "updates developer name" do
-      create(:developer)
-      visit edit_developer_path(:id => 1)
+      visit edit_developer_path(:id => developer.id)
       page.should have_selector "input", {:name => "name", :value => "DevName"}
-      fill_in "Name", :with => "ChangedName"
-      click_button "Update Developer"
+      fill_in 'Name', :with => 'ChangedName'
+      click_on "Update Developer"
+      page.should have_content 'ChangedName'
     end
   end
 end
