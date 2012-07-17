@@ -21,4 +21,12 @@ module BoardsHelper
       ''
     end
   end
+
+  # @param fraction:string | 1, 1/4, 1/2, 3/4. It must be a fraction. Can't be a float.
+  # @param color:string | hex color like #000fff 
+  # @param size:integer [Default=28] | size of the chart in px
+  # How to use: <%= pie_chart('1/2', "#cfcfcf") %>
+  def pie_chart(fraction, color, size = 22)
+    raw '<span class="pie" data-colour="' + color + '" data-diameter="' + size.to_s + '">' + fraction.to_s + '</span>'
+  end
 end

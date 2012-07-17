@@ -43,7 +43,14 @@
       <td<%= color_column(date) %>>
         <% dev.schedules.each do |schedule| %>
           <% if schedule.start_date <= date and schedule.end_date >= date %>
-            <a href="<%= project_path(schedule.project_id) %>" rel="tooltip" class="label label-success" style="background:<%= schedule.project_color %>;" title="<%= schedule.project_name %>"><%= schedule.project_name[0] %></a>
+          <%
+            # @TODO temporary solution to show how pie chart works
+            fraction = (Random.rand(4)+1).to_s + '/4'
+          %>
+            <div class="link_container">
+              <a href="<%= project_path(schedule.project_id) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
+            </div>
+            <%= pie_chart(fraction, schedule.project_color) %>
           <% end %>
         <% end %>
       </td>

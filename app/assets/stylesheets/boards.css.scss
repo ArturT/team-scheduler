@@ -3,10 +3,28 @@ $blue: #97D4F2;
 
 // used in boards/index.html.erb
 #board_calendar {
-  td a[rel=tooltip] {
-    text-shadow: 0px 0px 4px black;
-    margin-top: 5px;
-    display: block;
+  td {
+    a[rel=tooltip] {
+      margin-top: 5px;
+      display: block;
+      text-align: center;
+      color: #000;
+      text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+      padding: 3px 6px 3px 6px;
+      text-decoration: none;
+      position: absolute;
+      left: 0px;
+      top: -6px;
+      overflow: visible;
+    }
+
+    a[rel=tooltip]:hover {
+      color: #08c;
+    }
+
+    .link_container {
+      position: absolute;
+    }
   }
 
   .th_board_size {
