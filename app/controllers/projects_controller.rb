@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_filter :find_company_by_name, :only => [:index, :new, :edit]
+  before_filter :find_company_by_name, :only => [:index, :new, :create, :edit, :update]
   before_filter :find_project_by_id, :only => [:edit, :update, :destroy, :show]
 
   def index

@@ -1,5 +1,5 @@
 class DevelopersController < ApplicationController
-  before_filter :find_company_by_name, :only => [:index, :new, :edit]
+  before_filter :find_company_by_name, :only => [:index, :new, :create, :edit, :update]
   before_filter :find_developer_by_id, :only => [:edit, :update, :destroy]
 
   def index
