@@ -11,7 +11,7 @@ describe "Boards Requests" do
     login_with_google_auth(company)
   end
 
-  describe "GET /boards" do
+  describe "GET /board" do
     before do
       create(:schedule, :developer => developer, :project => project)
       visit board_index_path
