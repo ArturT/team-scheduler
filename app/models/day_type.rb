@@ -7,7 +7,7 @@ class DayType < ActiveRecord::Base
   validates :schedule_id, :presence => true
 
   # 0 = off day or sick day
-  # 2 =  1/4 day
+  # 2 = 1/4 day
   # 4 = 1/2 day
   # 6 = 3/4 day
   # 8 = full day
