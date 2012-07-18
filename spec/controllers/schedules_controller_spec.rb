@@ -49,6 +49,16 @@ describe SchedulesController do
         schedule.end_date.should == "2012-01-31".to_date
       end
 
+      it "saves each default day_info object" do
+        assigns(:schedule).day_types.count.should == 31
+      end
+
+      it "saves each day_info with full day" do
+        assigns(:schedule).day_types.each do |day|
+          day.hours.should == 8
+        end
+      end
+
       it "redirects to project" do
         response.should redirect_to project_path(1)
       end

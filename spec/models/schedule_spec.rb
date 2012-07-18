@@ -20,4 +20,8 @@ describe Schedule do
   it "validates that the start date is before the end date" do
     build(:schedule, :start_date => "2012-01-31", :end_date => "2012-01-01").should_not be_valid
   end
+
+  it "returns a date range" do
+    build(:schedule).date_range.should == (Date.new(2012, 01, 01)..Date.new(2012, 01, 31))
+  end
 end

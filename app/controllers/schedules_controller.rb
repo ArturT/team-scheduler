@@ -8,7 +8,13 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(params[:schedule])
+
     if @schedule.save
+      #save each day_type object with default type
+      @schedule.date_range.each do |date|
+        DayType.new(:date => date, :hours => 8, :schedule_id => @schedule.id).save
+      end
+
       flash[:success] = 'Schedule was created.'
       redirect_to project_path(params[:schedule][:project_id])
     else

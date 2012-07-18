@@ -18,4 +18,8 @@ class Schedule < ActiveRecord::Base
       errors.add(:start_date, "is greater than end date")
     end
   end
+
+  def date_range
+    start_date..end_date
+  end
 end
