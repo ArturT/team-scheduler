@@ -1,4 +1,5 @@
 class Schedule < ActiveRecord::Base
+  has_many :day_types, :dependent => :destroy
   belongs_to :developer
   delegate :name, :to => :developer, :prefix => true
   belongs_to :project
