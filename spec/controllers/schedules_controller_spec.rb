@@ -6,6 +6,7 @@ describe SchedulesController do
   let(:developer) { create(:developer, :company => company) }
   let(:project) { create(:project, :company => company) }
   let(:schedule) { create(:schedule, :project => project) }
+  let(:day_type) { create(:day_type, :schedule => schedule) }
 
   before do
     controller.should_receive(:authenticated)
@@ -100,20 +101,42 @@ describe SchedulesController do
 
   describe "update" do
     context "when the parameters are valid" do
-      before do
-        post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => "2012-01-01", :end_date => "2012-01-31"}
+      context "dates are added" do
+        before do
+          create_day_types_for_schedule(schedule)
+          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => "2012-01-01", :end_date => "2012-02-21"}
+        end
+
+        it "finds schedule object after update" do
+          schedule = assigns(:schedule)
+          schedule.developer_id.should == developer.id
+          schedule.project_id.should == project.id
+          schedule.start_date.should == "2012-01-01".to_date
+          schedule.end_date.should == "2012-02-21".to_date
+        end
+
+        it "adds day_type objects" do
+          assigns(:schedule).day_types.count.should == (Date.new(2012, 01, 01)..Date.new(2012, 02, 21)).count
+        end
       end
 
-      it "finds schedule object after update" do
-        schedule = assigns(:schedule)
-        schedule.developer_id.should == developer.id
-        schedule.project_id.should == project.id
-        schedule.start_date.should == "2012-01-01".to_date
-        schedule.end_date.should == "2012-01-31".to_date
-      end
+      context "dates are removed" do
+        before do
+          create_day_types_for_schedule(schedule)
+          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => "2012-01-01", :end_date => "2012-01-21"}
+        end
 
-      it "redirects to project" do
-        response.should redirect_to project_path(1)
+        it "finds schedule object after update" do
+          schedule = assigns(:schedule)
+          schedule.developer_id.should == developer.id
+          schedule.project_id.should == project.id
+          schedule.start_date.should == "2012-01-01".to_date
+          schedule.end_date.should == "2012-01-21".to_date
+        end
+
+        it "removed day_type objects" do
+          assigns(:schedule).day_types.count.should == (Date.new(2012, 01, 01)..Date.new(2012, 01, 21)).count
+        end
       end
     end
 
