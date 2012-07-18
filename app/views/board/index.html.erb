@@ -64,7 +64,7 @@
             <div class="link_container">
               <a href="<%= project_path(schedule.project_id) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
             </div>
-            <%= pie_chart(fraction, schedule.project_color) %>
+            <%= pie_chart(fraction, schedule.project_color) %><br />
           <% end %>
         <% end %>
       </td>
