@@ -19,7 +19,6 @@ describe "Boards Requests" do
 
     it "render boards template" do
       page.should have_content "DevName"
-      #page.should have_xpath("//a[@data-original-title='ProjectName | Time: 8/8']")
       page.should have_content "CompanyName Developer Timetable"
     end
 
