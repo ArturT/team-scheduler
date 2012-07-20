@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :schedule do
-    start_date "2012-01-01"
-    end_date "2012-01-31"
+    start_date Date.today.beginning_of_month
+    end_date Date.today.end_of_month
+    default_hours 8
     developer
     project
   end

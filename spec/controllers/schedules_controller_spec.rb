@@ -38,7 +38,7 @@ describe SchedulesController do
   describe "create" do
     context "when the parameters are valid" do
       before do
-        post :create, :project_id => project.id, :schedule => {:developer_id => developer.id, :project_id => project.id, :start_date => "2012-01-01", :end_date => "2012-01-31"}
+        post :create, :project_id => project.id, :schedule => {:developer_id => developer.id, :project_id => project.id, :start_date => "2012-01-01", :end_date => "2012-01-31", :default_hours => 8}
       end
 
       it "adds new schedule object" do
@@ -47,6 +47,7 @@ describe SchedulesController do
         schedule.project_id.should == project.id
         schedule.start_date.should == "2012-01-01".to_date
         schedule.end_date.should == "2012-01-31".to_date
+        schedule.default_hours.should == 8
       end
 
       it "redirects to project" do
@@ -90,17 +91,17 @@ describe SchedulesController do
 
   describe "update" do
     context "when the parameters are valid" do
-        before do
-          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => "2012-01-01", :end_date => "2012-02-21"}
-        end
+      before do
+        post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => "2012-01-01", :end_date => "2012-02-21"}
+      end
 
-        it "finds schedule object after update" do
-          schedule = assigns(:schedule)
-          schedule.developer_id.should == developer.id
-          schedule.project_id.should == project.id
-          schedule.start_date.should == "2012-01-01".to_date
-          schedule.end_date.should == "2012-02-21".to_date
-        end
+      it "finds schedule object after update" do
+        schedule = assigns(:schedule)
+        schedule.developer_id.should == developer.id
+        schedule.project_id.should == project.id
+        schedule.start_date.should == "2012-01-01".to_date
+        schedule.end_date.should == "2012-02-21".to_date
+      end
     end
 
     context "when the parameters are invalid" do
@@ -117,7 +118,7 @@ describe SchedulesController do
   describe "destroy" do
     it "deletes schedule" do
       schedule = create(:schedule, :developer => developer, :project => project)
-      expect { post :destroy, :id => schedule.id, :project_id => project.id }.to change{Schedule.count}.by(-1)
+      expect { post :destroy, :id => schedule.id, :project_id => project.id }.to change { Schedule.count }.by(-1)
       response.should redirect_to project_path(project.id)
     end
   end

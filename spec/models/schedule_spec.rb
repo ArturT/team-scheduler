@@ -22,6 +22,29 @@ describe Schedule do
   end
 
   it "returns a date range" do
-    build(:schedule).date_range.should == (Date.new(2012, 01, 01)..Date.new(2012, 01, 31))
+    build(:schedule).date_range.should == (Date.today.beginning_of_month..Date.today.end_of_month)
+  end
+
+  context "when there are no non_default_days in db" do
+    before do
+      @schedule = create(:schedule)
+    end
+
+    it "all days show up as default" do
+      @schedule.days.each do |day|
+        day.hours.should == @schedule.default_hours
+      end
+    end
+  end
+
+  context "when there are non_default_days in db" do
+    before do
+      @schedule = create(:schedule)
+      @non_default_day = create(:non_default_day, :date => Date.today, :schedule => @schedule)
+    end
+
+    it "one day should be non default" do
+      @schedule.days.find{ |d| d.hours == 4 }.should_not be_nil
+    end
   end
 end

@@ -19,8 +19,10 @@ describe "Boards Requests" do
 
     it "render boards template" do
       page.should have_content "DevName"
-      have_xpath("//span][@title='ProjectName']")
+      #page.should have_xpath("//a[@data-original-title='ProjectName | Time: 8/8']")
+      page.should have_content "CompanyName Developer Timetable"
     end
+
 
     it "shows the header for the current date" do
       page.should have_content company.name + " Developer Timetable for " + Date.today.strftime("%B %Y")
@@ -69,6 +71,10 @@ describe "Boards Requests" do
     it "has a logout feature" do
       click_on 'Logout'
       page.should have_content 'You have logged out.'
+    end
+
+    it "has pie chart for project" do
+      page.should have_xpath("//div[@class='link_container']")
     end
   end
 end
