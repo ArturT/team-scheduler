@@ -38,4 +38,12 @@ class Schedule < ActiveRecord::Base
     end
     list_of_days
   end
+
+  def delete_dates_before_start_date
+    non_default_days.where('date > ?', start_date).delete_all
+  end
+
+  def delete_dates_after_end_date
+    non_default_days.where('date < ?', end_date).delete_all
+  end
 end
