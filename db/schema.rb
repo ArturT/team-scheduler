@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720084122) do
+ActiveRecord::Schema.define(:version => 20120720112218) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20120720084122) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "non_default_days", ["schedule_id"], :name => "index_non_default_days_on_schedule_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"

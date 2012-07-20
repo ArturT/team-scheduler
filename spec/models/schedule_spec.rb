@@ -17,6 +17,10 @@ describe Schedule do
     build(:schedule, :end_date => '').should_not be_valid
   end
 
+  it "validates that there are default hours" do
+    build(:schedule, :default_hours => nil).should_not be_valid
+  end
+
   it "validates that the start date is before the end date" do
     build(:schedule, :start_date => "2012-01-31", :end_date => "2012-01-01").should_not be_valid
   end
