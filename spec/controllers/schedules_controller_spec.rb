@@ -51,7 +51,7 @@ describe SchedulesController do
       end
 
       it "redirects to project" do
-        response.should redirect_to project_path(1)
+        response.should redirect_to project_path(project.id)
       end
     end
 

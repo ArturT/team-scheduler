@@ -24,6 +24,18 @@ describe 'Schedules Requests' do
       page.should have_selector "select[name='schedule[developer_id]']"
     end
 
+    it "has a default hours selector" do
+      page.should have_content "Default hours"
+    end
+
+    it "has select option 1/4th day, etc" do
+      page.has_select?('Default hours', :options => %w(0 2 4 6 8)).should == true
+    end
+
+    it "has select option where selected is 8 hours" do
+      page.has_select?('Default hours', :selected => '8').should == true
+    end
+
     it "has a start date field" do
       page.should have_selector 'input#schedule_start_date'
     end
