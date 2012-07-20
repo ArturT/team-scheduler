@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :non_default_day do
-    date "2012-01-01"
+    date Date.today
     hours 4
     schedule
   end

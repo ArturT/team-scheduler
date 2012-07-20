@@ -6,7 +6,9 @@ TeamScheduler::Application.routes.draw do
   resources :board, :only => :index
   resources :developers
   resources :projects do
-    resources :schedules
+    resources :schedules do
+      resources :non_default_days, :as => :days, :path => 'days'
+    end
   end
   resources :schedules, :only => [:new, :create]
 
