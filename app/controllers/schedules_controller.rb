@@ -21,6 +21,7 @@ class SchedulesController < ApplicationController
   def edit
   end
 
+  #TODO delete non_defaults when changing the date range
   def update
     if @schedule.update_attributes(params[:schedule])
       flash[:success] = 'Schedule was updated.'

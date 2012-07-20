@@ -56,11 +56,8 @@
       <% @dates.each do |date| %>
       <td<%= color_column(date) %>>
         <% dev.schedules.each do |schedule| %>
-          <% if schedule.start_date <= date and schedule.end_date >= date %>
-          <%
-            # @TODO temporary solution to show how pie chart works
-            fraction = (Random.rand(5)).to_s + '/4'
-          %>
+          <% if day = schedule.days.find{ |d| d.date == date } %>
+            <% fraction = hours_to_fraction(day.hours) %>
             <div class="link_container">
               <a href="<%= project_path(schedule.project_id) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
             </div>

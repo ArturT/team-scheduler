@@ -29,4 +29,8 @@ module BoardsHelper
   def pie_chart(fraction, color, size = 20)
     raw '<span class="pie" data-colour="' + color + '" data-diameter="' + size.to_s + '">' + fraction.to_s + '</span>'
   end
+
+  def hours_to_fraction(hours)
+    hours.to_s + '/8'
+  end
 end
