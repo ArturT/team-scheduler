@@ -42,9 +42,8 @@
 
   <div class="control-group">
     <%= f.label :default_hours, :class => 'control-label' %>
-
     <div class="controls">
-      <%= f.select(:default_hours, [0,2,4,6,8], :selected => 8) %>
+      <%= f.select(:default_hours, options_for_select(@default_hours, hours_selected(schedule.default_hours))) %>
     </div>
   </div>
 

@@ -25,6 +25,16 @@ module ApplicationHelper
       raw '<li>' << link_to(title, path, options) << '</li>'
     end
   end
+
+  # @param hours:integer
+  # @return integer
+  def hours_selected(hours)
+    if hours.nil?
+      8 # default selected hour if param hours is nil
+    else
+      hours
+    end
+  end
 end
 
 class String

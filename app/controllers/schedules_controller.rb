@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   before_filter :find_project_and_developers, :only => [:new, :edit]
   before_filter :find_project_by_id, :only => [:edit, :update, :destroy]
+  before_filter :initialize_default_hours_hash, :only => [:new, :create, :edit, :update]
 
   def new
     @schedule = Schedule.new

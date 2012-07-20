@@ -29,11 +29,11 @@ describe 'Schedules Requests' do
     end
 
     it "has select option 1/4th day, etc" do
-      page.has_select?('Default hours', :options => %w(0 2 4 6 8)).should == true
+      page.has_select?('Default hours', :options => ['off or sick', '2 hours', '4 hours', '6 hours', '8 hours']).should == true
     end
 
     it "has select option where selected is 8 hours" do
-      page.has_select?('Default hours', :selected => '8').should == true
+      page.has_select?('Default hours', :selected => '8 hours').should == true
     end
 
     it "has a start date field" do
