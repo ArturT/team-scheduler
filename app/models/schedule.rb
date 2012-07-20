@@ -1,4 +1,6 @@
 class Schedule < ActiveRecord::Base
+  include ActiveModel::Validations
+
   has_many :non_default_days, :dependent => :destroy
   belongs_to :developer
   delegate :name, :to => :developer, :prefix => true
@@ -10,7 +12,7 @@ class Schedule < ActiveRecord::Base
   validates :project_id, :presence => true
   validates :start_date, :presence => true
   validates :end_date, :presence => true
-  validates :default_hours, :presence => true
+  validates :default_hours, :presence => true, :working_hours_scope => true
   validate :valid_dates?
 
   def valid_dates?
