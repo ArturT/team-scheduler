@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718122025) do
+ActiveRecord::Schema.define(:version => 20120720084122) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -20,19 +20,19 @@ ActiveRecord::Schema.define(:version => 20120718122025) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "day_types", :force => true do |t|
-    t.date     "date"
-    t.integer  "hours"
-    t.integer  "schedule_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "developers", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "company_id"
+  end
+
+  create_table "non_default_days", :force => true do |t|
+    t.date     "date"
+    t.integer  "hours"
+    t.integer  "schedule_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(:version => 20120718122025) do
     t.integer  "project_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "default_hours"
   end
 
   add_index "schedules", ["developer_id"], :name => "index_schedules_on_developer_id"

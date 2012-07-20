@@ -9,8 +9,6 @@ TeamScheduler::Application.routes.draw do
     resources :schedules
   end
   resources :schedules, :only => [:new, :create]
-  resources :day_types, :only => [:edit, :update, :destroy]
-  #match '/day_types/:schedule_id/:date', :to => 'day_types#edit'
 
   match '/auth/google', :as => 'auth_google'
   match '/auth/google/callback', :to => 'sessions#create'

@@ -1,4 +1,4 @@
-class DayType < ActiveRecord::Base
+class NonDefaultDay < ActiveRecord::Base
   belongs_to :schedule
   attr_accessible :date, :schedule_id, :hours
 

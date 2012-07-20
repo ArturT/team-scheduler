@@ -60,7 +60,6 @@ Spork.prefork do
     end
 
     config.include LoginHelper, :type => :request
-    config.include DayTypesHelper, :type => :controller
   end
 end
 
