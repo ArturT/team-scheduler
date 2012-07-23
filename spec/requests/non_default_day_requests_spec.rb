@@ -17,11 +17,21 @@ describe "NonDefaultDays Specs" do
       visit new_project_schedule_day_path(:project_id => project.id, :schedule_id => schedule.id, :date => Date.today)
     end
 
-    it "adds new non default day" do
-      page.select('6', :from => 'non_default_day_hours')
-      click_on 'Save Hours'
-      page.should have_content 'Day hours have been saved.'
-      page.should have_css 'a', :title => 'ProjectName | Time: 6/8'
+    context "hours are valid" do
+      it "adds new non default day" do
+        page.select('6', :from => 'non_default_day_hours')
+        click_on 'Save Hours'
+        page.should have_content 'Day hours have been saved.'
+        page.should have_css 'a', :title => 'ProjectName | Time: 6/8'
+      end
+    end
+
+    context "hours are the same as default" do
+      it "returns an error" do
+        page.select('8', :from => 'non_default_day_hours')
+        click_on 'Save Hours'
+        page.should have_content "Day hours haven't been changed."
+      end
     end
   end
 end

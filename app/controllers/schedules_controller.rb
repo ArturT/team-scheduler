@@ -22,6 +22,7 @@ class SchedulesController < ApplicationController
   def edit
   end
 
+  #TODO when changing default hours need to save date objects that are before this time
   def update
     if @schedule.update_schedule(params[:schedule])
       flash[:success] = 'Schedule was updated.'
