@@ -5,7 +5,7 @@ describe 'Schedules Requests' do
   let(:company) { create(:company) }
   let(:developer) { create(:developer, :company => company) }
   let(:project) { create(:project, :company => company) }
-  let(:schedule) { create(:schedule, :project => project) }
+  let(:schedule) { create(:schedule, :developer => developer, :project => project) }
 
   before do
     login_with_google_auth
