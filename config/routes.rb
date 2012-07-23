@@ -18,6 +18,8 @@ TeamScheduler::Application.routes.draw do
 
   match '/logout', :to => 'sessions#logout'
 
+  match '/projects/:project_id/schedules/:schedule_id/days/:id/change', :to => 'non_default_days#change', :as => 'change_project_schedule_day'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
