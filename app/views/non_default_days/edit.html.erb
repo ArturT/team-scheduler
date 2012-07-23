@@ -1,4 +1,4 @@
-<h1 class="page-header">Edit Non Default Day</h1>
+<h1 class="page-header">Edit Hours Worked This Day</h1>
 
 <%= form_for(@non_default_day, :url => project_schedule_day_path(:project_id => @schedule.project_id, :schedule_id => @schedule.id, :id => @non_default_day.id), :html => {:class => 'form-horizontal'}) do |f| %>
   <% if @non_default_day.errors.any? %>
@@ -44,7 +44,7 @@
   <%= f.hidden_field :schedule_id, :value => @schedule.id %>
 
   <div class="form-actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+    <%= f.submit 'Save Hours', :class => 'btn btn-primary' %>
     <%= link_to 'Back', board_index_path, :class => 'btn' %>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<h1 class="page-header">New Non Default Day</h1>
+<h1 class="page-header">Edit Hours Worked This Day</h1>
 
 <%= render 'layouts/notice' %>
 
@@ -47,7 +47,7 @@
   <%= f.hidden_field :date, :value => params[:date] %>
 
   <div class="form-actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+    <%= f.submit 'Save Hours', :class => 'btn btn-primary' %>
     <%= link_to 'Back', board_index_path, :class => 'btn' %>
   </div>
 <% end %>
