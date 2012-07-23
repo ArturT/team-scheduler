@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Project do
+
+  it "builds a valid factor" do
+    build(:project).should be_valid
+  end
+
   context "when params are correct" do
     it "validates name of project" do
       build(:project, :name => 'ProjectName').should be_valid

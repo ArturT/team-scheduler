@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe NonDefaultDay do
+  it "builds valid factory" do
+    build(:non_default_day).should be_valid
+  end
+
   it "validates presence of date" do
     build(:non_default_day, :date => '').should_not be_valid
   end
