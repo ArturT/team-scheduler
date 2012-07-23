@@ -5,7 +5,7 @@ describe SchedulesController do
   let(:company) { create(:company) }
   let(:developer) { create(:developer, :company => company) }
   let(:project) { create(:project, :company => company) }
-  let(:schedule) { create(:schedule, :project => project) }
+  let(:schedule) { create(:schedule, :project => project, :developer => developer) }
 
   before do
     controller.should_receive(:authenticated)
@@ -23,7 +23,7 @@ describe SchedulesController do
     end
 
     it "passes a project name" do
-      assigns(:project).name.should == "ProjectName"
+      assigns(:project).name.should == project.name
     end
 
     it "creates a new schedule object" do
@@ -37,11 +37,13 @@ describe SchedulesController do
 
   describe "create" do
     context "when the parameters are valid" do
-      before do
+
+      def dispatch
         post :create, :project_id => project.id, :schedule => {:developer_id => developer.id, :project_id => project.id, :start_date => "2012-01-01", :end_date => "2012-01-31", :default_hours => 8}
       end
 
       it "adds new schedule object" do
+        dispatch
         schedule = assigns(:schedule)
         schedule.developer_id.should == developer.id
         schedule.project_id.should == project.id
@@ -50,7 +52,12 @@ describe SchedulesController do
         schedule.default_hours.should == 8
       end
 
+      it "saves the schedule to db" do
+        expect{ dispatch }.to change{ Schedule.count }.by(1)
+      end
+
       it "redirects to project" do
+        dispatch
         response.should redirect_to project_path(project.id)
       end
     end
@@ -68,7 +75,6 @@ describe SchedulesController do
 
   describe "edit" do
     before do
-      create(:developer, :company => company)
       get :edit, :project_id => project.id, :id => schedule.id
     end
 
@@ -94,7 +100,7 @@ describe SchedulesController do
       context "when start date is later than before" do
         it "deletes non_default_days before the new start date" do
           create(:non_default_day, :date => Date.today.beginning_of_month, :schedule => schedule)
-          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => Date.today.beginning_of_month.next_week, :end_date => Date.today.end_of_month}
+          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => Date.today.beginning_of_month.next_day, :end_date => Date.today.end_of_month}
           assigns(:schedule).non_default_days.count.should == 0
         end
       end
@@ -102,7 +108,7 @@ describe SchedulesController do
       context "when end date is earlier than before" do
         it "deletes non_default_days after the new end date" do
           create(:non_default_day, :date => Date.today.end_of_month, :schedule => schedule)
-          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => Date.today.beginning_of_month, :end_date => Date.today.end_of_month.prev_week}
+          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => Date.today.beginning_of_month, :end_date => Date.today.end_of_month.prev_day}
           assigns(:schedule).non_default_days.count.should == 0
         end
       end
@@ -111,7 +117,7 @@ describe SchedulesController do
         it "deletes non_default_days that are outside the new date range" do
           create(:non_default_day, :date => Date.today.beginning_of_month, :schedule => schedule)
           create(:non_default_day, :date => Date.today.end_of_month, :schedule => schedule)
-          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => Date.today.beginning_of_month.next_week, :end_date => Date.today.end_of_month.prev_week}
+          post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => Date.today.beginning_of_month.next_day, :end_date => Date.today.end_of_month.prev_day}
           assigns(:schedule).non_default_days.count.should == 0
         end
       end

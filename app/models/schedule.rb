@@ -40,10 +40,20 @@ class Schedule < ActiveRecord::Base
   end
 
   def delete_dates_before_start_date
-    non_default_days.where('date > ?', start_date).delete_all
+    non_default_days.where('date < ?', start_date).delete_all
   end
 
   def delete_dates_after_end_date
-    non_default_days.where('date < ?', end_date).delete_all
+    non_default_days.where('date > ?', end_date).delete_all
+  end
+
+  def update_schedule(attributes)
+    if update_attributes(attributes)
+      delete_dates_before_start_date
+      delete_dates_after_end_date
+      true
+    else
+      false
+    end
   end
 end
