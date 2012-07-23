@@ -1,7 +1,7 @@
 <h1 class="page-header">Add New Schedule</h1>
 
 <% if @project %>
-<%= render 'form', :params => {:url => project_schedules_path(@project)}, :schedule => @schedule, :project => @project, :developers => @developers %>
+<%= render 'form', :params => {:url => project_schedules_path(@project)}, :schedule => @schedule, :project => @project, :developers => @developers, :default_hours => @default_hours %>
 <% else %>
-<%= render 'form', :params => {:url => schedules_path()}, :schedule => @schedule, :projects => @projects, :developers => @developers %>
+<%= render 'form', :params => {:url => schedules_path()}, :schedule => @schedule, :projects => @projects, :developers => @developers, :default_hours => @default_hours %>
 <% end %>

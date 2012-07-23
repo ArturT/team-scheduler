@@ -59,7 +59,7 @@
           <% if day = schedule.days.find{ |d| d.date == date } %>
             <% fraction = hours_to_fraction(day.hours) %>
             <div class="link_container">
-              <a href="<%= project_path(schedule.project_id) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
+              <a href="<%= change_project_schedule_day_path(schedule.project_id, schedule.id, day.id, :date => date) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
             </div>
             <%= pie_chart(fraction, schedule.project_color) %><br />
           <% end %>

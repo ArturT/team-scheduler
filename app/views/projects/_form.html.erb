@@ -1,34 +1,34 @@
 <%= form_for(project, :html => {:class => 'form-horizontal'}) do |f| %>
-<% if project.errors.any? %>
-<div class="alert alert-error">
-  <ul>
-    <% project.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+  <% if project.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+        <% project.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<div class="control-group">
-  <%= f.label :name, :class => 'control-label' %>
-  <%= f.hidden_field :company_id, :value => @company.id %>
-  <div class="controls">
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <%= f.hidden_field :company_id, :value => @company.id %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
   </div>
-</div>
 
-<div class="control-group">
-  <%= f.label :color, :class => 'control-label' %>
-  <div class="controls">
-    <%= f.text_field :color, :class => 'color-picker black' %>
-    <a href="#" id="randomize" class="btn btn-mini">Random color</a>
+  <div class="control-group">
+    <%= f.label :color, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :color, :class => 'color-picker black' %>
+      <a href="#" id="randomize" class="btn btn-mini">Random color</a>
+    </div>
   </div>
-</div>
 
-<div class="form-actions">
-  <%= f.submit :class => 'btn btn-primary' %>
-  <%= link_to 'Back', projects_path, :class => 'btn' %>
-</div>
+  <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+    <%= link_to 'Back', projects_path, :class => 'btn' %>
+  </div>
 <% end %>

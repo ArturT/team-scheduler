@@ -1,0 +1,50 @@
+<h1 class="page-header">Edit Non Default Day</h1>
+
+<%= form_for(@non_default_day, :url => project_schedule_day_path(:project_id => @schedule.project_id, :schedule_id => @schedule.id, :id => @non_default_day.id), :html => {:class => 'form-horizontal'}) do |f| %>
+  <% if @non_default_day.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+        <% @non_default_day.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= label_tag 'project_name', 'Project Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= text_field_tag 'project_name', @schedule.project_name, :disabled => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label_tag 'developer_name', 'Developer Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= text_field_tag 'developer_name', @schedule.developer_name, :disabled => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :date, :readonly => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :hours, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:hours, options_for_select(@default_hours, hours_selected(@non_default_day.hours))) %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :schedule_id, :value => @schedule.id %>
+
+  <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+    <%= link_to 'Back', board_index_path, :class => 'btn' %>
+  </div>
+<% end %>
