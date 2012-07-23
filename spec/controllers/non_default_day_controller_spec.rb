@@ -13,6 +13,22 @@ describe NonDefaultDaysController do
     session[:authenticated] = company.name
   end
 
+  describe "change" do
+    context "when id is -1" do
+      it "should redirect to new" do
+        get :change, :id => -1, :project_id => project.id, :schedule_id => schedule.id
+        response.should redirect_to new_project_schedule_day_path
+      end
+    end
+
+    context "when id is valid" do
+      it "should redirect to edit" do
+        get :change, :id => non_default_day.id, :project_id => project.id, :schedule_id => schedule.id
+        response.should redirect_to edit_project_schedule_day_path
+      end
+    end
+  end
+
   describe "new" do
     before do
       get :new, :project_id => project.id, :schedule_id => schedule.id
@@ -51,6 +67,21 @@ describe NonDefaultDaysController do
       end
     end
 
+    context "when hours haven't been changed" do
+      def dispatch
+        post :create, :project_id => project.id, :schedule_id => schedule.id, :non_default_day => {:schedule_id => schedule.id, :date => Date.today, :hours => schedule.default_hours}
+      end
+
+      it "does not save the non_default_day to the database" do
+        expect{ dispatch }.to change{ NonDefaultDay.count }.by(0)
+      end
+
+      it "renders new template" do
+        dispatch
+        response.should render_template 'new'
+      end
+    end
+
     context "when parameters are invalid" do
       it "renders new page" do
         post :create, :project_id => project.id, :schedule_id => schedule.id, :non_default_day => {:schedule_id => schedule.id, :date => Date.today, :hours => 3}
@@ -66,10 +97,6 @@ describe NonDefaultDaysController do
 
     it "renders edit template" do
       response.should render_template("edit")
-    end
-
-    it "has a project object" do
-      assigns(:project).name.should == project.name
     end
 
     it "has a schedule object" do
@@ -100,6 +127,17 @@ describe NonDefaultDaysController do
       it "redirects to board index" do
         dispatch
         response.should redirect_to board_index_path
+      end
+    end
+
+    context "when hour set back to default" do
+      def dispatch
+        post :update, :project_id => project.id, :schedule_id => schedule.id, :id => non_default_day.id, :non_default_day => { :id => non_default_day.id, :schedule_id => schedule.id, :date => Date.today, :hours => schedule.default_hours }
+      end
+
+      it "non default day should be remove" do
+        pending
+        expect{ dispatch }.to change{ NonDefaultDay.count }.by(-1)
       end
     end
 
