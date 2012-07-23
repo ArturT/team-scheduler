@@ -131,13 +131,21 @@ describe NonDefaultDaysController do
     end
 
     context "when hour set back to default" do
+      before do
+        @non_default_day = create(:non_default_day)
+      end
+
       def dispatch
-        post :update, :project_id => project.id, :schedule_id => schedule.id, :id => non_default_day.id, :non_default_day => { :id => non_default_day.id, :schedule_id => schedule.id, :date => Date.today, :hours => schedule.default_hours }
+        post :update, :project_id => project.id, :schedule_id => schedule.id, :id => @non_default_day.id, :non_default_day => { :id => @non_default_day.id, :schedule_id => schedule.id, :date => Date.today, :hours => schedule.default_hours }
       end
 
       it "non default day should be remove" do
-        pending
         expect{ dispatch }.to change{ NonDefaultDay.count }.by(-1)
+      end
+
+      it "redirects to board index" do
+        dispatch
+        response.should redirect_to board_index_path
       end
     end
 
