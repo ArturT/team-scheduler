@@ -15,6 +15,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'factory_girl'
+  require 'draper/test/rspec_integration' # https://github.com/jcasimir/draper#integration-with-rspec
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.

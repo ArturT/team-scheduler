@@ -41,6 +41,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'draper'
 end
 
 group :test do
