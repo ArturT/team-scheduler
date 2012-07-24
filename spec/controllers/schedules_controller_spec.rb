@@ -56,6 +56,17 @@ describe SchedulesController do
         expect{ dispatch }.to change{ Schedule.count }.by(1)
       end
 
+
+      it "creates non_default_day objects for weekend set to 0 hours" do
+        dispatch
+        schedule = assigns(:schedule)
+        schedule.non_default_days.count.should == 9
+        schedule.non_default_days.each do |non_default_day|
+          non_default_day.hours.should == 0
+          non_default_day.date.strftime('%a').should match /S[ua][nt]/
+        end
+      end
+
       it 'redirects to project' do
         dispatch
         response.should redirect_to project_path(project.id)

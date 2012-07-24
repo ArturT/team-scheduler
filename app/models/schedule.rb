@@ -70,6 +70,15 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def create_weekend_days
+    (start_date..end_date).each do |date|
+      # .wday 0 == Sunday, wday 6 == Saturday
+      if date.wday == 0 || date.wday == 6
+        NonDefaultDay.new(:schedule_id => id, :hours => 0, :date => date).save
+      end
+    end
+  end
+
   def hours_to_fraction(hours)
     hours.to_s + "/" + default_hours.to_s
   end

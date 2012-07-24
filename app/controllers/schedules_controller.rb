@@ -9,8 +9,8 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(params[:schedule])
-
     if @schedule.save
+      @schedule.create_weekend_days
       flash[:success] = 'Schedule was created.'
       redirect_to project_path(params[:schedule][:project_id])
     else
