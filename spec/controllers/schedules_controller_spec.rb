@@ -37,7 +37,6 @@ describe SchedulesController do
 
   describe 'create' do
     context 'when the parameters are valid' do
-
       def dispatch
         post :create, :project_id => project.id, :schedule => {:developer_id => developer.id, :project_id => project.id, :start_date => '2012-01-01', :end_date => '2012-01-31', :default_hours => 8}
       end
@@ -53,7 +52,7 @@ describe SchedulesController do
       end
 
       it 'saves the schedule to db' do
-        expect{ dispatch }.to change{ Schedule.count }.by(1)
+        expect { dispatch }.to change { Schedule.count }.by(1)
       end
 
 
@@ -135,11 +134,8 @@ describe SchedulesController do
     end
 
     context 'when the parameters are invalid' do
-      before do
+      it 'renders edit when start date is after end date' do
         post :update, :id => schedule.id, :project_id => project.id, :schedule => {:id => schedule.id, :project_id => project.id, :developer_id => developer.id, :start_date => '2012-01-31', :end_date => '2012-01-01'}
-      end
-
-      it 'renders edit with the values' do
         response.should render_template 'edit'
       end
     end
