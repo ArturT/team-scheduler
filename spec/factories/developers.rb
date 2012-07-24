@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :developer do
     name 'DevName'
-    role 'Developer'
+    role 'DevRole'
     company
   end
 end

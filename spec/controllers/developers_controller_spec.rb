@@ -44,7 +44,7 @@ describe DevelopersController do
   describe 'create' do
     context 'when params are correct' do
       def dispatch
-        post :create, {:developer => {:name => 'CreatedName', :company_id => company.id}}
+        post :create, {:developer => {:name => 'CreatedName', :role => 'DevRole', :company_id => company.id}}
       end
 
       it 'create developer' do
@@ -85,13 +85,15 @@ describe DevelopersController do
       end
 
       def dispatch
-        post :update, {:id => developer.id, :developer => {:name => 'ChangedName', :company_id => company.id}}
+        post :update, {:id => developer.id, :developer => {:name => 'ChangedName', :role => 'ChangedRole', :company_id => company.id}}
       end
 
       it 'updates developer in db' do
         Developer.find(developer.id).name.should == 'DevName'
+        Developer.find(developer.id).role.should == 'DevRole'
         dispatch
         Developer.find(developer.id).name.should == 'ChangedName'
+        Developer.find(developer.id).role.should == 'ChangedRole'
       end
     end
 

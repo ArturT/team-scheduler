@@ -20,18 +20,21 @@ describe 'Developers Specs' do
     it 'renders list of developers' do
       page.should have_content 'List Of Developers'
       page.should have_content 'DevName'
+      page.should have_content 'DevRole'
     end
 
     it 'has edit link' do
       page.should have_link 'edit'
       click_on 'edit'
       page.should have_selector 'input', :value => 'DevName'
+      page.should have_selector 'input', :value => 'DevRole'
     end
 
     it 'has delete link' do
       page.should have_link 'delete'
       click_on 'delete'
       page.should_not have_content 'DevName'
+      page.should_not have_content 'DevRole'
     end
 
     it 'has new developer link' do
@@ -49,13 +52,16 @@ describe 'Developers Specs' do
     it 'adds new developer' do
       page.should have_selector 'input', :name => 'name'
       fill_in 'Name', :with => 'AddNewName'
+      fill_in 'Role', :with => 'AddNewRole'
       click_on 'Create Developer'
       page.should have_content 'AddNewName'
+      page.should have_content 'AddNewRole'
     end
 
     it 'has errors message' do
       click_on 'Create Developer'
-      page.should have_content("can't be blank")
+      page.should have_content("Name can't be blank")
+      page.should have_content("Role can't be blank")
     end
   end
 
@@ -63,9 +69,12 @@ describe 'Developers Specs' do
     it 'updates developer name' do
       visit edit_developer_path(:id => developer.id)
       page.should have_selector 'input', {:name => 'name', :value => 'DevName'}
+      page.should have_selector 'input', {:name => 'role', :value => 'DevRole'}
       fill_in 'Name', :with => 'ChangedName'
+      fill_in 'Role', :with => 'ChangedRole'
       click_on 'Update Developer'
       page.should have_content 'ChangedName'
+      page.should have_content 'ChangedRole'
     end
   end
 end

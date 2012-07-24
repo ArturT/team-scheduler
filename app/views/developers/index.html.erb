@@ -7,15 +7,15 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Role</th>
       <th class="action_td_with">Action</th>
     </tr>
   </thead>
   <tbody>
     <% @company.developers.each do |dev| %>
     <tr>
-      <td>
-        <%= dev.name %>
-      </td>
+      <td><%= dev.name %></td>
+      <td><%= dev.role %></td>
       <td>
         <%= link_to 'edit', edit_developer_path(dev), :class => 'btn btn-mini' %>
         <%= link_to 'delete', developer_path(dev), :method => :delete, :class => 'btn btn-mini', :data => { :confirm => 'Are you sure?' } %>
