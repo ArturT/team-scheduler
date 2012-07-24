@@ -22,12 +22,16 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  def between_date_range?(date)
-    date >= start_date && date <= end_date
-  end
-
-  def default_day(date)
-    DefaultDay.new(date, default_hours)
+  def day_between_date_range(date)
+    if date >= start_date && date <= end_date
+      if day = non_default_days.find{ |d| d.date == date }
+      else
+        day = DefaultDay.new(date, default_hours)
+      end
+      day
+    else
+      nil
+    end
   end
 
   def delete_dates_before_start_date
