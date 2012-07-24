@@ -56,13 +56,16 @@
       <% @dates.each do |date| %>
       <td<%= color_column(date) %>>
         <% dev.schedules.each do |schedule| %>
-          <% if day = schedule.days.find{ |d| d.date == date } %>
+          <%# puts schedule.days %>
+          <%# if day = schedule.days.find{ |d| d.date == date } %>
+          <% if day = working_hours(@ndd_for_all_devs, date, schedule) %>
             <% fraction = hours_to_fraction(day.hours) %>
             <div class="link_container">
               <a href="<%= change_project_schedule_day_path(schedule.project_id, schedule.id, day.id, :date => date) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
             </div>
             <%= pie_chart(fraction, schedule.project_color) %><br />
           <% end %>
+          
         <% end %>
       </td>
       <% end %>

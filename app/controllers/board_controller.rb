@@ -9,6 +9,8 @@ class BoardController < ApplicationController
       @date = Date.today
     end
 
+    @ndd_for_all_devs = NonDefaultDay.find(:all, :conditions => ['date >= ? AND date <= ?', @date.beginning_of_month, @date.end_of_month])
+
     @dates = @date.beginning_of_month..@date.end_of_month
   end
 end

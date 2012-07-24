@@ -33,4 +33,15 @@ module BoardsHelper
   def hours_to_fraction(hours)
     hours.to_s + '/8'
   end
+
+  def working_hours(non_default_days, date, schedule)
+    if date >= schedule.start_date and date <= schedule.end_date
+      non_default_days.each do |ndd|
+        if ndd.schedule_id == schedule.id and ndd.date == date
+          return ndd
+        end
+      end
+      DefaultDay.new(date, schedule.default_hours)
+    end
+  end
 end
