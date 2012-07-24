@@ -27,6 +27,10 @@ class Schedule < ActiveRecord::Base
   end
 
   def days
+    @days ||= days_load
+  end
+
+  def days_load
     list_of_days = []
     date_range.each do |date|
       non_default = non_default_days.find_by_date(date)
