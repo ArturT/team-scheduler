@@ -31,6 +31,22 @@ describe Schedule do
     end
   end
 
+  context "when there are overlapping schedules in the db" do
+    before do
+      @developer = create(:developer)
+      @project = create(:project)
+      create(:schedule, :start_date => "2012-01-10", :end_date => "2012-01-20", :project => @project, :developer => @developer)
+    end
+
+    xit "validates when dates overlap near start_date" do
+      build(:schedule, :start_date => "2012-01-01", :end_date => "2012-01-13", :project => @project, :developer => @developer).should_not be_valid
+    end
+
+    xit "validates when dates overlap near end_date" do
+      build(:schedule, :start_date => "2012-01-17", :end_date => "2012-01-30", :project => @project, :developer => @developer).should_not be_valid
+    end
+  end
+
   context 'when there are no non_default_days in db' do
     before do
       @schedule = create(:schedule)

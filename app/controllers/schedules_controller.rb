@@ -20,7 +20,6 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-    @developer = Developer.find(@schedule.developer_id)
   end
 
   def update
@@ -52,5 +51,6 @@ class SchedulesController < ApplicationController
 
   def find_schedule_by_id
     @schedule = Schedule.find(params[:id])
+    @developer = Developer.find(@schedule.developer_id)
   end
 end

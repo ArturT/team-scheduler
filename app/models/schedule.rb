@@ -14,11 +14,26 @@ class Schedule < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :default_hours, :presence => true, :working_hours_scope => true
   validate :valid_dates?
+  #validate :overlapping_dates?
 
   def valid_dates?
     return unless start_date && end_date
     if start_date > end_date
       errors.add(:start_date, 'is greater than end date')
+    end
+  end
+
+  #TODO this screws up update (validate only for create)
+  def overlapping_dates?
+    return unless start_date && end_date
+    other_schedules = Schedule.find_all_by_developer_id_and_project_id(developer_id, project_id)
+    other_schedules.each do |other_schedule|
+      if start_date >= other_schedule.start_date && start_date <= other_schedule.end_date
+        errors.add(:start_date, 'overlaps another one of your schedules for this project')
+      end
+      if end_date >= other_schedule.start_date && end_date <= other_schedule.end_date
+        errors.add(:end_date, 'overlaps another one of your schedules for this project')
+      end
     end
   end
 
