@@ -5,11 +5,15 @@ describe Developer do
     build(:developer).should be_valid
   end
 
-  it 'validates presence of name' do
+  it 'validates presence of a name' do
     build(:developer, :name => '').should_not be_valid
   end
 
   it 'validates presence of a company id' do
     build(:developer, :company_id => nil).should_not be_valid
+  end
+
+  it 'validates presence of a role' do
+    build(:developer, :role => '').should_not be_valid
   end
 end
