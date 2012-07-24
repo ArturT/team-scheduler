@@ -32,9 +32,9 @@ class Schedule < ActiveRecord::Base
 
   def days_load
     list_of_days = []
+    non_defaults = non_default_days # non_default_days (from has_many relation)
     date_range.each do |date|
-      non_default = non_default_days.find_by_date(date)
-      if non_default
+      if non_default = non_defaults.find { |ndd| ndd.date == date }
         list_of_days << non_default
       else
         list_of_days << DefaultDay.new(date, default_hours)
