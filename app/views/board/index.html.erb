@@ -57,7 +57,7 @@
         <% @dates.each do |date| %>
           <td<%= color_column(date) %>>
             <% if day = schedule.day_between_date_range(date) %>
-              <% fraction = hours_to_fraction(day.hours) %>
+              <% fraction = schedule.hours_to_fraction(day.hours) %>
               <div class="link_container">
                 <a href="<%= change_project_schedule_day_path(schedule.project_id, schedule.id, day.id, :date => date) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
               </div>

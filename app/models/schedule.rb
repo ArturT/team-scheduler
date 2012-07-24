@@ -69,4 +69,8 @@ class Schedule < ActiveRecord::Base
       end
     end
   end
+
+  def hours_to_fraction(hours)
+    hours.to_s + "/" + default_hours.to_s
+  end
 end
