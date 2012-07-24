@@ -18,59 +18,55 @@
 
 <table class="table table-bordered table-striped responsive-utilities" id="board_calendar">
   <thead>
-  <tr>
-    <th class="th_board_size">
-      Developer<br/>Name
-    </th>
-    <th>
-      <div class="weekday_name_container">
-        <div class="weekday_name">
-          <span>Action</span>
-        </div>
-      </div>
-    </th>
-    <% @dates.each do |date| %>
-      <th<%= color_column(date) %>>
+    <tr>
+      <th class="th_board_size">
+         Developer<br />Name
+      </th>
+      <th>
         <div class="weekday_name_container">
           <div class="weekday_name">
-            <%= date.strftime("%a") %>
+            <span>Action</span>
           </div>
         </div>
-        <%= date.strftime("%d") %>
       </th>
-    <% end %>
-  </tr>
+      <% @dates.each do |date| %>
+        <th<%= color_column(date) %>>
+          <div class="weekday_name_container">
+            <div class="weekday_name">
+              <%= date.strftime("%a") %>
+            </div>
+          </div>
+          <%= date.strftime("%d") %>
+        </th>
+      <% end %>
+    </tr>
   </thead>
   <tbody>
-  <% @developers.each do |dev| %>
-    <% dev.schedules.each do |schedule| %>
-      <tr>
-        <td><%= dev.name %></td>
-        <td>
-          <div class="btn-group">
-            <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle"><i class="caret"></i></button>
-            <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-ok"></i> Approve Your Month</a></li>
-            </ul>
-          </div>
-        </td>
-        <% @dates.each do |date| %>
-          <td<%= color_column(date) %>>
-            <% if schedule.between_date_range?(date) %>
-              <% if day = schedule.non_default_days.find { |d| d.date == date } %>
-              <% else %>
-                <% day = schedule.default_day(date) %>
-              <% end %>
-              <% fraction = hours_to_fraction(day.hours) %>
-              <div class="link_container">
-                <a href="<%= change_project_schedule_day_path(schedule.project_id, schedule.id, day.id, :date => date) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
-              </div>
-              <%= pie_chart(fraction, schedule.project_color) %><br/>
-            <% end %>
-          </td>
+    <% @company.developers.each do |dev| %>
+    <tr>
+      <td><%= dev.name %></td>
+      <td>
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle"><i class="caret"></i></button>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="icon-ok"></i> Approve Your Month</a></li>
+          </ul>
+        </div>
+      </td>
+      <% @dates.each do |date| %>
+      <td<%= color_column(date) %>>
+        <% dev.schedules.each do |schedule| %>
+          <% if day = schedule.days.find{ |d| d.date == date } %>
+            <% fraction = hours_to_fraction(day.hours) %>
+            <div class="link_container">
+              <a href="<%= change_project_schedule_day_path(schedule.project_id, schedule.id, day.id, :date => date) %>" rel="tooltip" title="<%= schedule.project_name + ' | Time: ' + fraction %>"><%= schedule.project_name[0] %></a>
+            </div>
+            <%= pie_chart(fraction, schedule.project_color) %><br />
+          <% end %>
         <% end %>
-      </tr>
+      </td>
+      <% end %>
+    </tr>
     <% end %>
-  <% end %>
   </tbody>
 </table>
