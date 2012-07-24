@@ -100,7 +100,9 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  def hours_to_fraction(hours)
-    hours.to_s + "/" + default_hours.to_s
+  # @param hours:integer Working hours
+  # @param per_hours:integer Default working hours 
+  def hours_to_fraction(hours, per_hours = default_hours)
+    hours.to_s + "/" + per_hours.to_s
   end
 end
