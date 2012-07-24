@@ -21,19 +21,15 @@ describe 'Schedules Requests' do
     end
 
     it "has list of developer dropdown" do
-      page.should have_selector "select[name='schedule[developer_id]']"
-    end
-
-    it "has a default hours selector" do
-      page.should have_content "Default hours"
+      page.should have_select 'schedule_default_hours'
     end
 
     it "has select option 1/4th day, etc" do
-      page.has_select?('Default hours', :options => ['off or sick', '2 hours', '4 hours', '6 hours', '8 hours']).should == true
+      page.has_select?('Default Hours', :options => ['off or sick', '2 hours', '4 hours', '6 hours', '8 hours']).should == true
     end
 
     it "has select option where selected is 8 hours" do
-      page.has_select?('Default hours', :selected => '8 hours').should == true
+      page.has_select?('Default Hours', :selected => '8 hours').should == true
     end
 
     it "has a start date field" do
@@ -45,14 +41,14 @@ describe 'Schedules Requests' do
     end
 
     it "has errors message" do
-      fill_in 'Start date', :with => '2012-01-31'
-      fill_in 'End date', :with => '2012-01-01'
+      fill_in 'Start Date', :with => '2012-01-31'
+      fill_in 'End Date', :with => '2012-01-01'
       click_on 'Create Schedule'
       page.should have_content("Start date is greater than end date")
     end
   end
 
-  describe 'GET project/:project_id/schedules/:id/edit' do
+  describe "GET project/:project_id/schedules/:id/edit" do
     before do
       visit edit_project_schedule_path(:id => schedule.id, :project_id => project.id)
     end
@@ -61,8 +57,8 @@ describe 'Schedules Requests' do
       page.should have_selector 'input', :value => 'ProjectName'
     end
 
-    it "has list of developer dropdown" do
-      page.should have_selector "select[name='schedule[developer_id]']"
+    it "has a developer name field" do
+      page.should have_selector 'input', :value => 'DevName'
     end
 
     it "has a start date field" do
@@ -71,6 +67,30 @@ describe 'Schedules Requests' do
 
     it "has an end date field" do
       page.should have_selector 'input#schedule_end_date'
+    end
+
+    it "has a default hours column" do
+      page.should have_select 'schedule_default_hours'
+    end
+
+    context "change fields" do
+      it "updates start date" do
+        fill_in 'Start Date', :with => Date.yesterday
+        click_on 'Update Schedule'
+        page.should have_css 'td', :text => Date.yesterday.to_s
+      end
+
+      it "updates end date" do
+        fill_in 'End Date', :with => Date.tomorrow
+        click_on 'Update Schedule'
+        page.should have_css 'td', :text => Date.tomorrow.to_s
+      end
+
+      it "updates default hours" do
+        page.select('4', :from => 'schedule_default_hours')
+        click_on 'Update Schedule'
+        page.should have_css 'td', :text => '4'
+      end
     end
   end
 
@@ -96,8 +116,8 @@ describe 'Schedules Requests' do
     end
 
     it "has errors message" do
-      fill_in 'Start date', :with => '2012-01-31'
-      fill_in 'End date', :with => '2012-01-01'
+      fill_in 'Start Date', :with => '2012-01-31'
+      fill_in 'End Date', :with => '2012-01-01'
       click_on 'Create Schedule'
       page.should have_content("Start date is greater than end date")
     end

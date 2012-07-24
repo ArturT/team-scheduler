@@ -93,8 +93,8 @@ describe "Projects Requests" do
 
     it "renders edit template for the schedule" do
       click_on 'edit'
-      page.should have_selector('input', :value=> 'ProjectName')
-      page.should have_content 'DevName'
+      page.should have_selector('input', :value => 'ProjectName')
+      page.should have_selector('input', :value => 'DevName')
     end
 
     it "deletes the schedule" do

@@ -47,4 +47,45 @@ describe Schedule do
       @schedule.non_default_days.find{ |d| d.hours == 4 }.should_not be_nil
     end
   end
+
+  context "when default hours has not been changes" do
+    it "does not do anything when calling change_default_hours" do
+      @schedule = create(:schedule)
+      # run change_default_hours on the same hours that are already in the schedule
+      @schedule.change_default_hours(8)
+      @schedule.non_default_days.count.should == 0
+    end
+  end
+
+  context "when default hours has changed" do
+    it "create a non_default_day for each day before today" do
+      # create schedule with default hours of 8
+      @schedule = create(:schedule)
+      # simulate edit action to change default hours to 4
+      @schedule.update_attribute(:default_hours, 4)
+      # run change_default_hours with the previous default hours of 8
+      @schedule.change_default_hours(8)
+      days_from_start_to_today = (@schedule.start_date...Date.today).count
+      # check that new 8 hours non_default_days have been created
+      @schedule.non_default_days.count.should == days_from_start_to_today
+      @schedule.non_default_days.find_all{ |d| d.date < Date.today }.each do |non_default_day|
+        non_default_day.hours.should == 4
+      end
+    end
+
+    it "deletes all non_default_days that are the same as the new default hours" do
+      # create schedule with default hours of 8
+      @schedule = create(:schedule)
+      # add a bunch of non_default_days with hours 4
+      (@schedule.start_date...Date.today).each do |date|
+        create(:non_default_day, :schedule => @schedule, :hours => 4, :date => date)
+      end
+      # simulate edit action to change default hours to 4
+      @schedule.update_attribute(:default_hours, 4)
+      # run change_default_hours with the previous default hours of 8
+      @schedule.change_default_hours(8)
+      # this method should delete all non_default_days that have hours 4 as that is the default hours anyway
+      @schedule.non_default_days.count.should == 0
+    end
+  end
 end

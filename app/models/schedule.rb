@@ -18,7 +18,7 @@ class Schedule < ActiveRecord::Base
   def valid_dates?
     return unless start_date && end_date
     if start_date > end_date
-      errors.add(:start_date, "is greater than end date")
+      errors.add(:start_date, 'is greater than end date')
     end
   end
 
@@ -34,6 +34,18 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def update_schedule(attributes)
+    prev_default_hours = default_hours
+    if update_attributes(attributes)
+      change_default_hours(prev_default_hours)
+      delete_dates_before_start_date
+      delete_dates_after_end_date
+      true
+    else
+      false
+    end
+  end
+
   def delete_dates_before_start_date
     non_default_days.where('date < ?', start_date).delete_all
   end
@@ -42,13 +54,19 @@ class Schedule < ActiveRecord::Base
     non_default_days.where('date > ?', end_date).delete_all
   end
 
-  def update_schedule(attributes)
-    if update_attributes(attributes)
-      delete_dates_before_start_date
-      delete_dates_after_end_date
-      true
-    else
-      false
+  def change_default_hours(prev_default_hours)
+    unless prev_default_hours == default_hours
+      (start_date...Date.today).each do |date|
+        # if a non_default_day exists for this date, if its hours match default hours delete it
+        if non_default_day = non_default_days.find{ |d| d.date == date }
+          if non_default_day.hours == default_hours
+            NonDefaultDay.delete(non_default_day.id)
+          end
+          # else create a new non_default_day with the previous default hours
+        else
+          NonDefaultDay.new(:schedule_id => id, :hours => prev_default_hours, :date => date).save
+        end
+      end
     end
   end
 end
