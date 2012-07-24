@@ -37,9 +37,30 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def date_range
+    start_date..end_date
+  end
+
+  def days
+    @days ||= days_load
+  end
+
+  def days_load
+    list_of_days = []
+    non_defaults = non_default_days # non_default_days (from has_many relation)
+    date_range.each do |date|
+      if non_default = non_defaults.find { |ndd| ndd.date == date }
+        list_of_days << non_default
+      else
+        list_of_days << DefaultDay.new(date, default_hours)
+      end
+    end
+    list_of_days
+  end
+
   def day_between_date_range(date)
     if date >= start_date && date <= end_date
-      if day = non_default_days.find{ |d| d.date == date }
+      if day = non_default_days.find { |d| d.date == date }
       else
         day = DefaultDay.new(date, default_hours)
       end
@@ -73,7 +94,7 @@ class Schedule < ActiveRecord::Base
     unless prev_default_hours == default_hours
       (start_date...Date.today).each do |date|
         # if a non_default_day exists for this date, if its hours match default hours delete it
-        if non_default_day = non_default_days.find{ |d| d.date == date }
+        if non_default_day = non_default_days.find { |d| d.date == date }
           if non_default_day.hours == default_hours
             NonDefaultDay.delete(non_default_day.id)
           end
