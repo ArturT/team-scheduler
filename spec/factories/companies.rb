@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :company do
-    name "CompanyName"
-    domain "company.com"
+    name 'CompanyName'
+    domain 'company.com'
   end
 end

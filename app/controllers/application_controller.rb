@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def authenticated
     unless session[:authenticated]
-      flash[:error] = "You must be logged in to view this page"
+      flash[:error] = 'You must be logged in to view this page'
       redirect_to root_path
     end
   end

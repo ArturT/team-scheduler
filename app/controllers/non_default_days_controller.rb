@@ -17,12 +17,13 @@ class NonDefaultDaysController < ApplicationController
 
   def create
     @non_default_day = NonDefaultDay.new(params[:non_default_day])
+    new_default_hours = params[:non_default_day][:hours].to_i
 
-    if params[:non_default_day][:hours].to_i == @schedule.default_hours
-      flash[:error] = "Day hours haven't been changed."
+    if new_default_hours == @schedule.default_hours
+      flash[:error] = 'Day hours have not been changed.'
       render :new, :params => { :date => params[:date] }
     elsif @non_default_day.save
-      flash[:success] = "Day hours have been saved."
+      flash[:success] = 'Day hours have been saved.'
       redirect_to board_index_path
     else
       render :new, :params => { :date => params[:date] }
@@ -33,7 +34,9 @@ class NonDefaultDaysController < ApplicationController
   end
 
   def update
-    if params[:non_default_day][:hours].to_i == @schedule.default_hours
+    new_default_hours = params[:non_default_day][:hours].to_i
+
+    if new_default_hours == @schedule.default_hours
       NonDefaultDay.delete(params[:id])
       redirect_to board_index_path
     else

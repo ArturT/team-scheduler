@@ -4,12 +4,12 @@ FactoryGirl.define do
   sequence(:hex_color) { "#{generate_hex_color}" }
 
   factory :project do
-    name "ProjectName"
+    name 'ProjectName'
     color { FactoryGirl.generate(:hex_color) }
     company
   end
 end
 
 def generate_hex_color
-  "#" + ("%06x" % (rand * 0xffffff))
+  '#' + ('%06x' % (rand * 0xffffff))
 end
