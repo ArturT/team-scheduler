@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-<%# already defined project_id %>
+  <%# already defined project_id %>
   <% if defined? project %>
     <div class="control-group">
-      <label class="control-label">Project Name:</label>
+      <label class="control-label">Project Name</label>
 
       <div class="controls">
         <%= text_field_tag 'project_name', project.name, :disabled => true %>
@@ -22,33 +22,44 @@
       </div>
     </div>
   <% else %>
-<%# user can pick project %>
+  <%# user can pick project %>
     <div class="control-group">
-      <label class="control-label">Pick Project:</label>
-
+      <label class="control-label">Pick Project</label>
       <div class="controls">
         <%= f.collection_select(:project_id, projects, :id, :name) %>
       </div>
     </div>
   <% end %>
 
-  <div class="control-group">
-    <label class="control-label">Pick Developer:</label>
+  <%# when editiing it should be unable to change developer  %>
+  <% if defined? developer %>
+    <div class="control-group">
+      <label class="control-label">Developer Name</label>
 
-    <div class="controls">
-      <%= f.collection_select(:developer_id, developers, :id, :name) %>
+      <div class="controls">
+        <%= text_field_tag 'developer_name', developer.name, :disabled => true %>
+        <%= f.hidden_field :developer_id, :value => developer.id %>
+      </div>
     </div>
-  </div>
+  <% else %>
+  <%# when new, show list of developers  %>
+    <div class="control-group">
+      <label class="control-label">Pick Developer</label>
+      <div class="controls">
+        <%= f.collection_select(:developer_id, developers, :id, :name) %>
+      </div>
+    </div>
+  <% end %>
 
   <div class="control-group">
-    <%= f.label :default_hours, :class => 'control-label' %>
+    <%= f.label :default_hours, 'Default Hours', :class => 'control-label' %>
     <div class="controls">
       <%= f.select(:default_hours, options_for_select(default_hours, hours_selected(schedule.default_hours))) %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :start_date, :class => 'control-label' %>
+    <%= f.label :start_date, 'Start Date', :class => 'control-label' %>
     <div class="controls">
       <%# f.text_field "start_date" %>
       <%= f.datepicker 'start_date', :dateFormat => "yy-mm-dd" %>
@@ -56,7 +67,7 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :end_date, :class => 'control-label' %>
+    <%= f.label :end_date, 'End Date', :class => 'control-label' %>
     <div class="controls">
       <%# f.text_field "end_date" %>
       <%= f.datepicker 'end_date', :dateFormat => "yy-mm-dd" %>
