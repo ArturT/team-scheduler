@@ -7,8 +7,9 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Start date</th>
-        <th>End date</th>
+        <th>Default Hours</th>
+        <th>Start Date</th>
+        <th>End Date</th>
         <th class="action_td_with">Action</th>
       </tr>
     </thead>
@@ -16,6 +17,7 @@
       <% @schedules.each do |schedule| %>
       <tr>
         <td><%= schedule.developer_name %></td>
+        <td><%= schedule.default_hours %></td>
         <td><%= schedule.start_date %></td>
         <td><%= schedule.end_date %></td>
         <td>

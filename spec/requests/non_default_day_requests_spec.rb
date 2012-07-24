@@ -30,7 +30,7 @@ describe "NonDefaultDays Specs" do
       it "returns an error" do
         page.select('8', :from => 'non_default_day_hours')
         click_on 'Save Hours'
-        page.should have_content "Day hours haven't been changed."
+        page.should have_content "Day hours have not been changed."
       end
     end
   end

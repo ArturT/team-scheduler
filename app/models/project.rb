@@ -6,5 +6,5 @@ class Project < ActiveRecord::Base
   validates :name, :presence => true
   validates :company_id, :presence => true
   validates :color, :presence => true, :uniqueness => true
-  validates_format_of :color, :with => /^#[0-9a-f]{6}$/i, :message => "format is not valid"
+  validates_format_of :color, :with => /^#[0-9a-f]{6}$/i, :message => 'format is not valid'
 end

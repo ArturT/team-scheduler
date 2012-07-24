@@ -8,7 +8,7 @@ class WorkingHoursScopeValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     unless value.nil?
       unless (0..8).step(2).include?(value)
-        record.errors.add(attribute, "must be in scope 0, 2, 4, 6, 8.")
+        record.errors.add(attribute, 'must be in scope 0, 2, 4, 6, 8.')
       end
     end
   end
