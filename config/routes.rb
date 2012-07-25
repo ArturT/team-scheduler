@@ -2,8 +2,9 @@ TeamScheduler::Application.routes.draw do
 
   root :to => 'home#index'
 
-  resources :home, :only => [:index, :logout]
-  resources :board, :only => :index
+  resources :home, :only => [:index]
+  resources :board, :only => [:index]
+  resources :report, :only => [:index]
   resources :developers
   resources :projects do
     resources :schedules do
@@ -15,9 +16,7 @@ TeamScheduler::Application.routes.draw do
   match '/auth/google', :as => 'auth_google'
   match '/auth/google/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
-
   match '/logout', :to => 'sessions#logout'
-
   match '/projects/:project_id/schedules/:schedule_id/days/:id/change', :to => 'non_default_days#change', :as => 'change_project_schedule_day'
 
   # The priority is based upon order of creation:

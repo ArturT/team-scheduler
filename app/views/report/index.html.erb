@@ -1,0 +1,24 @@
+<h1 class="page-header"><%= @company.name %> Reporting for <%= @date.strftime("%B %Y") %></h1>
+
+<table>
+  <% @company.projects.each do |project| %>
+    <thead>
+    <tr>
+      <th>
+        <%= project.name %>
+      </th>
+    </tr>
+    </thead>
+    <% project.schedules.each do |schedule| %>
+      <tbody>
+      <tr>
+        <td>
+          <%= schedule.developer_name %>
+          <%= schedule.developer_role %>
+          <%= schedule.sum_of_days(@date) %>
+        </td>
+      </tr>
+      </tbody>
+    <% end %>
+  <% end %>
+</table>

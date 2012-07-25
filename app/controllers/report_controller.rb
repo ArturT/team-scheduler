@@ -1,8 +1,7 @@
-class BoardController < ApplicationController
+class ReportController < ApplicationController
   before_filter :get_company_and_date
 
   def index
-    @dates = @date.beginning_of_month..@date.end_of_month
   end
 
   private

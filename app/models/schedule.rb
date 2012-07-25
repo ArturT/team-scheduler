@@ -4,6 +4,7 @@ class Schedule < ActiveRecord::Base
   has_many :non_default_days, :dependent => :destroy
   belongs_to :developer
   delegate :name, :to => :developer, :prefix => true
+  delegate :role, :to => :developer, :prefix => true
   belongs_to :project
   delegate :name, :color, :to => :project, :prefix => true
   attr_accessible :developer_id, :end_date, :project_id, :start_date, :default_hours
@@ -23,7 +24,6 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  #TODO this screws up update (validate only for create)
   def overlapping_dates?
     return unless start_date && end_date
     # find all other schedules with same developer id and project id
@@ -46,10 +46,10 @@ class Schedule < ActiveRecord::Base
   end
 
   def days
-    @days ||= days_load
+    @days ||= load_days
   end
 
-  def days_load
+  def load_days
     list_of_days = []
     non_defaults = non_default_days # non_default_days (from has_many relation)
     date_range.each do |date|
@@ -60,18 +60,6 @@ class Schedule < ActiveRecord::Base
       end
     end
     list_of_days
-  end
-
-  def day_between_date_range(date)
-    if date >= start_date && date <= end_date
-      if day = non_default_days.find { |d| d.date == date }
-      else
-        day = DefaultDay.new(date, default_hours)
-      end
-      day
-    else
-      nil
-    end
   end
 
   def update_schedule(attributes)
@@ -119,9 +107,17 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  # @param hours:integer Working hours
+  # @param hours:integer working hours
   # @param per_hours:integer Default working hours 
   def hours_to_fraction(hours, per_hours = default_hours)
     hours.to_s + "/" + per_hours.to_s
+  end
+
+  def sum_of_days(date)
+    total_hours = 0
+    days.find_all{ |d| (d.date >= date.beginning_of_month && d.date <= date.end_of_month) }.each do |day|
+      total_hours += day.hours
+    end
+    total_hours / 8.0
   end
 end
